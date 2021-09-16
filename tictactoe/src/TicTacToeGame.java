@@ -9,7 +9,7 @@ import java.awt.event.*;
  * principles and needs a thorough overhaul to improve readability,
  * extensibility, and testability.
  */
-public class TicTacToe {
+public class TicTacToeGame {
     public JFrame gui = new JFrame("Tic Tac Toe");
     public JButton[][] blocks = new JButton[3][3];
     public JButton reset = new JButton("Reset");
@@ -21,14 +21,14 @@ public class TicTacToe {
      * The main method that starts the game.
      */
     public static void main(String[] args) {
-        TicTacToe game = new TicTacToe();
+        TicTacToeGame game = new TicTacToeGame();
         game.gui.setVisible(true);
     }
 
     /**
      * The default constructor, which initializes the GUI.
      */
-    public TicTacToe() {
+    public TicTacToeGame() {
         gui.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         gui.setSize(new Dimension(500, 350));
         gui.setResizable(true);

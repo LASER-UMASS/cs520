@@ -14,7 +14,7 @@ TicTacToe.java is a basic Java implementation of the well-known Tic Tac Toe game
 ### How to run (from Terminal):
 
 1. After building the project (i.e., running `ant`), run:
-   `java -cp bin TicTacToe`
+   `java -cp bin TicTacToeGame`
 
 ### How to clean up (from Terminal):
 
