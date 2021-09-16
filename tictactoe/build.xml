@@ -1,23 +1,40 @@
 <project name="TicTacToe" default="compile" basedir=".">
 
     <property name="junit.jar" value="../lib/junit-4.11.jar"/>
-
+  
 <!-- Clean up -->
     <target name="clean" description="Clean">
         <delete dir="bin"/>
+        <delete dir="jdoc"/>
     </target>
 
 <!-- Initialize build -->
     <target name="init">
         <mkdir dir="bin"/>
+	<mkdir dir="jdoc"/>
+    </target>
+
+<!-- Generate the documentation based on the javadoc comments -->
+    <target name="document" depends="init" description="Generate
+    documentation for all sources">
+        <javadoc defaultexcludes="yes"
+		 destdir="jdoc"
+		 author="true"
+		 version="true"
+		 access="private"
+		 use="true"
+		 windowtitle="CS520 - Homework 1">
+	    <fileset dir="src"/>
+	</javadoc>
     </target>
 
 <!-- Compile the project -->
     <target name="compile" depends="init" description="Compile all sources">
         <javac includeantruntime="true" 
                srcdir="src"
-              destdir="bin"
-                debug="yes">
+               destdir="bin"
+               debug="yes">
+	    <classpath path="bin"/>
         </javac>
     </target>
 
@@ -25,8 +42,8 @@
     <target name="compile.tests" depends="compile" description="Compile all tests">
         <javac includeantruntime="true" 
                srcdir="test"
-              destdir="bin"
-                debug="yes">
+               destdir="bin"
+               debug="yes">
             <classpath location="${junit.jar}"/>
         </javac>
     </target>
@@ -35,7 +52,7 @@
     <target name="test" depends="compile.tests" description="Run all unit tests">
         <echo message="Running unit tests ..."/>
         <junit  printsummary="true" 
-        		showoutput="true" 
+        	showoutput="true" 
                 haltonfailure="false">
             <formatter type="plain" usefile="false"/>
             <classpath path="bin"/>
@@ -47,5 +64,5 @@
                 </fileset>
             </batchtest>
         </junit>
-    </target>
+    </target>    
 </project>
