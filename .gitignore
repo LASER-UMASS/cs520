@@ -1,2 +1,3 @@
-coverage_results
-mutation_results
+triangle/coverage_results
+triangle/mutation_results
+triangle/bin
