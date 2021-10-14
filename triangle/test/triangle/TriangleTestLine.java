@@ -9,7 +9,7 @@ import static triangle.Triangle.Type.*;
 /**
  * Test class for the Line component.
  */
-public class Line {
+public class TriangleTestLine {
 
 	@Test
 	public void testInit() {
