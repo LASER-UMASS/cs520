@@ -2,7 +2,7 @@ package model;
 
 public class RowGameModel 
 {
-    public TicTacToeBlock[][] blocksData = new TicTacToeBlock[3][3];
+    public RowBlockModel[][] blocksData = new RowBlockModel[3][3];
     /**
      * The current player taking their turn
      */
@@ -14,7 +14,7 @@ public class RowGameModel
 
         for(int row = 0; row<3; row++) {
             for(int column = 0; column<3 ;column++) {
-                blocksData[row][column] = new TicTacToeBlock(this);
+                blocksData[row][column] = new RowBlockModel(this);
                 blocksData[row][column].setContents("");
                 blocksData[row][column].setIsLegalMove(true);
 	    } // end for column

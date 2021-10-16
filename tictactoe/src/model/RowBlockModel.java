@@ -3,7 +3,7 @@ package model;
 /**
  * The TicTacToeBlock class represents a given block in the game.
  */
-public class TicTacToeBlock
+public class RowBlockModel
 {
     /**
      * The game that contains this block
@@ -26,7 +26,7 @@ public class TicTacToeBlock
      * @param game The game that will contain the new block
      * @throws IllegalArgumentException When the given game is null
      */
-    public TicTacToeBlock(RowGameModel game) {
+    public RowBlockModel(RowGameModel game) {
 	super();
 
 	if (game == null) {

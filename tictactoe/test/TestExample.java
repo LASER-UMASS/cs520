@@ -3,7 +3,7 @@ import org.junit.Before;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
-import model.TicTacToeBlock;
+import model.RowBlockModel;
 
 /**
  * An example test class, which merely shows how to write JUnit tests.
@@ -29,6 +29,6 @@ public class TestExample {
 
     @Test(expected = IllegalArgumentException.class)
     public void testNewBlockViolatesPrecondition() {
-	TicTacToeBlock block = new TicTacToeBlock(null);
+	RowBlockModel block = new RowBlockModel(null);
     }
 }
