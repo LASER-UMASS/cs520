@@ -14,7 +14,7 @@ TicTacToeGame.java and TicTacToeBlock.java are a basic Java implementation of th
 ### How to run (from Terminal):
 
 1. After building the project (i.e., running `ant`), run the following command in the tictactoe folder:
-   `java -cp bin TicTacToeGame`
+   `java -cp bin controller.RowGameController`
 
 ### How to clean up (from Terminal):
 
