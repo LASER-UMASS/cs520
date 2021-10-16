@@ -5,6 +5,8 @@ import javax.swing.JPanel;
 import java.awt.*;
 import java.awt.event.*;
 
+import model.RowGameModel;
+
 /**
  * Java implementation of the tic tac toe game, using the Swing framework.
  *

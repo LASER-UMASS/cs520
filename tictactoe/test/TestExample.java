@@ -3,6 +3,8 @@ import org.junit.Before;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
+import model.TicTacToeBlock;
+
 /**
  * An example test class, which merely shows how to write JUnit tests.
  */

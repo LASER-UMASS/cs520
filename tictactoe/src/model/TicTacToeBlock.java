@@ -1,3 +1,5 @@
+package model;
+
 /**
  * The TicTacToeBlock class represents a given block in the game.
  */

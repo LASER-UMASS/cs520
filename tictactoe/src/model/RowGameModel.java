@@ -1,3 +1,5 @@
+package model;
+
 public class RowGameModel 
 {
     public TicTacToeBlock[][] blocksData = new TicTacToeBlock[3][3];
