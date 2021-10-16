@@ -15,8 +15,6 @@ import model.RowGameModel;
  * extensibility, and testability.
  */
 public class TicTacToeGame {
-    public static final String GAME_END_NOWINNER = "Game ends in a draw";
-
     public JFrame gui = new JFrame("Tic Tac Toe");
     public RowGameModel gameModel = new RowGameModel();
     public JButton[][] blocks = new JButton[3][3];
@@ -64,6 +62,8 @@ public class TicTacToeGame {
         // Initialize a JButton for each cell of the 3x3 game board.
         for(int row = 0; row<3; row++) {
             for(int column = 0; column<3 ;column++) {
+	        gameModel.blocksData[row][column].setContents("");
+		gameModel.blocksData[row][column].setIsLegalMove(true);
                 blocks[row][column] = new JButton();
                 blocks[row][column].setPreferredSize(new Dimension(75,75));
 		updateBlock(row,column);
@@ -103,10 +103,13 @@ public class TicTacToeGame {
 			gameModel.blocksData[1][0].getContents().equals(gameModel.blocksData[2][0].getContents())) ||
 		       (gameModel.blocksData[0][0].getContents().equals(gameModel.blocksData[1][1].getContents()) &&
 			gameModel.blocksData[1][1].getContents().equals(gameModel.blocksData[2][2].getContents()))) {
-			playerturn.setText("Player 1 wins!");
+			gameModel.setFinalResult("Player 1 wins!");
 			endGame();
 		    } else if(gameModel.movesLeft==0) {
-			playerturn.setText(GAME_END_NOWINNER);
+			gameModel.setFinalResult(RowGameModel.GAME_END_NOWINNER);
+		    }
+		    if (gameModel.getFinalResult() != null) {
+			playerturn.setText(gameModel.getFinalResult());
 		    }
 		}
 	    } else if(block==blocks[0][1]) {
@@ -118,10 +121,13 @@ public class TicTacToeGame {
 			gameModel.blocksData[0][0].getContents().equals(gameModel.blocksData[0][2].getContents())) ||
 		       (gameModel.blocksData[0][1].getContents().equals(gameModel.blocksData[1][1].getContents()) &&
 			gameModel.blocksData[1][1].getContents().equals(gameModel.blocksData[2][1].getContents()))) {
-			playerturn.setText("Player 1 wins!");
+			gameModel.setFinalResult("Player 1 wins!");
 			endGame();
 		    } else if(gameModel.movesLeft==0) {
-			playerturn.setText(GAME_END_NOWINNER);
+			gameModel.setFinalResult(RowGameModel.GAME_END_NOWINNER);
+		    }
+		    if (gameModel.getFinalResult() != null) {
+			playerturn.setText(gameModel.getFinalResult());
 		    }
 		}
 	    } else if(block==blocks[0][2]) {
@@ -135,10 +141,13 @@ public class TicTacToeGame {
 			gameModel.blocksData[1][2].getContents().equals(gameModel.blocksData[2][2].getContents())) ||
 		       (gameModel.blocksData[0][2].getContents().equals(gameModel.blocksData[1][1].getContents()) &&
 			gameModel.blocksData[1][1].getContents().equals(gameModel.blocksData[2][0].getContents()))) {
-			playerturn.setText("Player 1 wins!");
+			gameModel.setFinalResult("Player 1 wins!");
 			endGame();
 		    } else if(gameModel.movesLeft==0) {
-			playerturn.setText(GAME_END_NOWINNER);
+			gameModel.setFinalResult(RowGameModel.GAME_END_NOWINNER);
+		    }
+		    if (gameModel.getFinalResult() != null) {
+			playerturn.setText(gameModel.getFinalResult());
 		    }
 		}
 	    } else if(block==blocks[1][0]) {
@@ -151,10 +160,13 @@ public class TicTacToeGame {
 			gameModel.blocksData[1][1].getContents().equals(gameModel.blocksData[1][2].getContents())) ||
 		       (gameModel.blocksData[1][0].getContents().equals(gameModel.blocksData[0][0].getContents()) &&
 			gameModel.blocksData[0][0].getContents().equals(gameModel.blocksData[2][0].getContents()))) {
-			playerturn.setText("Player 1 wins!");
+			gameModel.setFinalResult("Player 1 wins!");
 			endGame();
 		    } else if(gameModel.movesLeft==0) {
-			playerturn.setText(GAME_END_NOWINNER);
+			gameModel.setFinalResult(RowGameModel.GAME_END_NOWINNER);
+		    }
+		    if (gameModel.getFinalResult() != null) {
+			playerturn.setText(gameModel.getFinalResult());
 		    }
 		}
 	    } else if(block==blocks[1][1]) {
@@ -171,10 +183,13 @@ public class TicTacToeGame {
 			gameModel.blocksData[0][0].getContents().equals(gameModel.blocksData[2][2].getContents())) ||
 		       (gameModel.blocksData[1][1].getContents().equals(gameModel.blocksData[0][2].getContents()) &&
 			gameModel.blocksData[0][2].getContents().equals(gameModel.blocksData[2][0].getContents()))) {
-			playerturn.setText("Player 1 wins!");
+			gameModel.setFinalResult("Player 1 wins!");
 			endGame();
 		    } else if(gameModel.movesLeft==0) {
-			playerturn.setText(GAME_END_NOWINNER);
+			gameModel.setFinalResult(RowGameModel.GAME_END_NOWINNER);
+		    }
+		    if (gameModel.getFinalResult() != null) {
+			playerturn.setText(gameModel.getFinalResult());
 		    }
 		}
 	    } else if(block==blocks[1][2]) {
@@ -187,10 +202,13 @@ public class TicTacToeGame {
 			gameModel.blocksData[0][2].getContents().equals(gameModel.blocksData[2][2].getContents())) ||
 		       (gameModel.blocksData[1][2].getContents().equals(gameModel.blocksData[1][1].getContents()) &&
 			gameModel.blocksData[1][1].getContents().equals(gameModel.blocksData[1][0].getContents()))) {
-			playerturn.setText("Player 1 wins!");
+			gameModel.setFinalResult("Player 1 wins!");
 			endGame();
 		    } else if(gameModel.movesLeft==0) {
-			playerturn.setText(GAME_END_NOWINNER);
+			gameModel.setFinalResult(RowGameModel.GAME_END_NOWINNER);
+		    }
+		    if (gameModel.getFinalResult() != null) {
+			playerturn.setText(gameModel.getFinalResult());
 		    }
 		}
 	    } else if(block==blocks[2][0]) {
@@ -205,10 +223,13 @@ public class TicTacToeGame {
 			gameModel.blocksData[1][0].getContents().equals(gameModel.blocksData[0][0].getContents())) ||
 		       (gameModel.blocksData[2][0].getContents().equals(gameModel.blocksData[1][1].getContents()) &&
 			gameModel.blocksData[1][1].getContents().equals(gameModel.blocksData[0][2].getContents()))) {
-			playerturn.setText("Player 1 wins!");
+			gameModel.setFinalResult("Player 1 wins!");
 			endGame();
 		    } else if(gameModel.movesLeft==0) {
-			playerturn.setText(GAME_END_NOWINNER);
+			gameModel.setFinalResult(RowGameModel.GAME_END_NOWINNER);
+		    }
+		    if (gameModel.getFinalResult() != null) {
+			playerturn.setText(gameModel.getFinalResult());
 		    }
 		}
 	    } else if(block==blocks[2][1]) {
@@ -221,10 +242,13 @@ public class TicTacToeGame {
 			gameModel.blocksData[2][0].getContents().equals(gameModel.blocksData[2][2].getContents())) ||
 		       (gameModel.blocksData[2][1].getContents().equals(gameModel.blocksData[1][1].getContents()) &&
 			gameModel.blocksData[1][1].getContents().equals(gameModel.blocksData[0][1].getContents()))) {
-			playerturn.setText("Player 1 wins!");
+			gameModel.setFinalResult("Player 1 wins!");
 			endGame();
 		    } else if(gameModel.movesLeft==0) {
-			playerturn.setText(GAME_END_NOWINNER);
+			gameModel.setFinalResult(RowGameModel.GAME_END_NOWINNER);
+		    }
+		    if (gameModel.getFinalResult() != null) {
+			playerturn.setText(gameModel.getFinalResult());
 		    }
 		}
 	    } else if(block==blocks[2][2]) {
@@ -239,10 +263,13 @@ public class TicTacToeGame {
 			gameModel.blocksData[1][2].getContents().equals(gameModel.blocksData[0][2].getContents())) ||
 		       (gameModel.blocksData[2][2].getContents().equals(gameModel.blocksData[1][1].getContents()) &&
 			gameModel.blocksData[1][1].getContents().equals(gameModel.blocksData[0][0].getContents()))) {
-			playerturn.setText("Player 1 wins!");
+			gameModel.setFinalResult("Player 1 wins!");
 			endGame();
 		    } else if(gameModel.movesLeft==0) {
-			playerturn.setText(GAME_END_NOWINNER);
+			gameModel.setFinalResult(RowGameModel.GAME_END_NOWINNER);
+		    }
+		    if (gameModel.getFinalResult() != null) {
+			playerturn.setText(gameModel.getFinalResult());
 		    }
 		}
 	    }
@@ -259,10 +286,13 @@ public class TicTacToeGame {
 			gameModel.blocksData[1][0].getContents().equals(gameModel.blocksData[2][0].getContents())) ||
 		       (gameModel.blocksData[0][0].getContents().equals(gameModel.blocksData[1][1].getContents()) &&
 			gameModel.blocksData[1][1].getContents().equals(gameModel.blocksData[2][2].getContents()))) {
-			playerturn.setText("Player 2 wins!");
+			gameModel.setFinalResult("Player 2 wins!");
 			endGame();
 		    } else if(gameModel.movesLeft==0) {
-			playerturn.setText(GAME_END_NOWINNER);
+			gameModel.setFinalResult(RowGameModel.GAME_END_NOWINNER);
+		    }
+		    if (gameModel.getFinalResult() != null) {
+			playerturn.setText(gameModel.getFinalResult());
 		    }
 		}
 	    } else if(block==blocks[0][1]) {
@@ -274,10 +304,13 @@ public class TicTacToeGame {
 			gameModel.blocksData[0][0].getContents().equals(gameModel.blocksData[0][2].getContents())) ||
 		       (gameModel.blocksData[0][1].getContents().equals(gameModel.blocksData[1][1].getContents()) &&
 			gameModel.blocksData[1][1].getContents().equals(gameModel.blocksData[2][1].getContents()))) {
-			playerturn.setText("Player 2 wins!");
+			gameModel.setFinalResult("Player 2 wins!");
 			endGame();
 		    } else if(gameModel.movesLeft==0) {
-			playerturn.setText(GAME_END_NOWINNER);
+			gameModel.setFinalResult(RowGameModel.GAME_END_NOWINNER);
+		    }
+		    if (gameModel.getFinalResult() != null) {
+			playerturn.setText(gameModel.getFinalResult());
 		    }
 		}
 	    } else if(block==blocks[0][2]) {
@@ -291,10 +324,13 @@ public class TicTacToeGame {
 			gameModel.blocksData[1][2].getContents().equals(gameModel.blocksData[2][2].getContents())) ||
 		       (gameModel.blocksData[0][2].getContents().equals(gameModel.blocksData[1][1].getContents()) &&
 			gameModel.blocksData[1][1].getContents().equals(gameModel.blocksData[2][0].getContents()))) {
-			playerturn.setText("Player 2 wins!");
+			gameModel.setFinalResult("Player 2 wins!");
 			endGame();
 		    } else if(gameModel.movesLeft==0) {
-			playerturn.setText(GAME_END_NOWINNER);
+			gameModel.setFinalResult(RowGameModel.GAME_END_NOWINNER);
+		    }
+		    if (gameModel.getFinalResult() != null) {
+			playerturn.setText(gameModel.getFinalResult());
 		    }
 		}
 	    } else if(block==blocks[1][0]) {
@@ -307,10 +343,13 @@ public class TicTacToeGame {
 			gameModel.blocksData[1][1].getContents().equals(gameModel.blocksData[1][2].getContents())) ||
 		       (gameModel.blocksData[1][0].getContents().equals(gameModel.blocksData[0][0].getContents()) &&
 			gameModel.blocksData[0][0].getContents().equals(gameModel.blocksData[2][0].getContents()))) {
-			playerturn.setText("Player 2 wins!");
+			gameModel.setFinalResult("Player 2 wins!");
 			endGame();
 		    } else if(gameModel.movesLeft==0) {
-			playerturn.setText(GAME_END_NOWINNER);
+			gameModel.setFinalResult(RowGameModel.GAME_END_NOWINNER);
+		    }
+		    if (gameModel.getFinalResult() != null) {
+			playerturn.setText(gameModel.getFinalResult());
 		    }
 		}
 	    } else if(block==blocks[1][1]) {
@@ -327,10 +366,13 @@ public class TicTacToeGame {
 			gameModel.blocksData[0][0].getContents().equals(gameModel.blocksData[2][2].getContents())) ||
 		       (gameModel.blocksData[1][1].getContents().equals(gameModel.blocksData[0][2].getContents()) &&
 			gameModel.blocksData[0][2].getContents().equals(gameModel.blocksData[2][0].getContents()))) {
-			playerturn.setText("Player 2 wins!");
+			gameModel.setFinalResult("Player 2 wins!");
 			endGame();
 		    } else if(gameModel.movesLeft==0) {
-			playerturn.setText(GAME_END_NOWINNER);
+			gameModel.setFinalResult(RowGameModel.GAME_END_NOWINNER);
+		    }
+		    if (gameModel.getFinalResult() != null) {
+			playerturn.setText(gameModel.getFinalResult());
 		    }
 		}
 	    } else if(block==blocks[1][2]) {
@@ -343,10 +385,13 @@ public class TicTacToeGame {
 			gameModel.blocksData[0][2].getContents().equals(gameModel.blocksData[2][2].getContents())) ||
 		       (gameModel.blocksData[1][2].getContents().equals(gameModel.blocksData[1][1].getContents()) &&
 			gameModel.blocksData[1][1].getContents().equals(gameModel.blocksData[1][0].getContents()))) {
-			playerturn.setText("Player 2 wins!");
+			gameModel.setFinalResult("Player 2 wins!");
 			endGame();
 		    } else if(gameModel.movesLeft==0) {
-			playerturn.setText(GAME_END_NOWINNER);
+			gameModel.setFinalResult(RowGameModel.GAME_END_NOWINNER);
+		    }
+		    if (gameModel.getFinalResult() != null) {
+			playerturn.setText(gameModel.getFinalResult());
 		    }
 		}
 	    } else if(block==blocks[2][0]) {
@@ -361,10 +406,13 @@ public class TicTacToeGame {
 			gameModel.blocksData[1][0].getContents().equals(gameModel.blocksData[0][0].getContents())) ||
 		       (gameModel.blocksData[2][0].getContents().equals(gameModel.blocksData[1][1].getContents()) &&
 			gameModel.blocksData[1][1].getContents().equals(gameModel.blocksData[0][2].getContents()))) {
-			playerturn.setText("Player 2 wins!");
+			gameModel.setFinalResult("Player 2 wins!");
 			endGame();
 		    } else if(gameModel.movesLeft==0) {
-			playerturn.setText(GAME_END_NOWINNER);
+			gameModel.setFinalResult(RowGameModel.GAME_END_NOWINNER);
+		    }
+		    if (gameModel.getFinalResult() != null) {
+			playerturn.setText(gameModel.getFinalResult());
 		    }
 		}
 	    } else if(block==blocks[2][1]) {
@@ -377,10 +425,13 @@ public class TicTacToeGame {
 			gameModel.blocksData[2][0].getContents().equals(gameModel.blocksData[2][2].getContents())) ||
 		       (gameModel.blocksData[2][1].getContents().equals(gameModel.blocksData[1][1].getContents()) &&
 			gameModel.blocksData[1][1].getContents().equals(gameModel.blocksData[0][1].getContents()))) {
-			playerturn.setText("Player 2 wins!");
+			gameModel.setFinalResult("Player 2 wins!");
 			endGame();
 		    } else if(gameModel.movesLeft==0) {
-			playerturn.setText(GAME_END_NOWINNER);
+			gameModel.setFinalResult(RowGameModel.GAME_END_NOWINNER);
+		    }
+		    if (gameModel.getFinalResult() != null) {
+			playerturn.setText(gameModel.getFinalResult());
 		    }
 		}
 	    } else if(block==blocks[2][2]) {
@@ -395,10 +446,13 @@ public class TicTacToeGame {
 			gameModel.blocksData[1][2].getContents().equals(gameModel.blocksData[0][2].getContents())) ||
 		       (gameModel.blocksData[2][2].getContents().equals(gameModel.blocksData[1][1].getContents()) &&
 			gameModel.blocksData[1][1].getContents().equals(gameModel.blocksData[0][0].getContents()))) {
-			playerturn.setText("Player 2 wins!");
+			gameModel.setFinalResult("Player 2 wins!");
 			endGame();
 		    } else if(gameModel.movesLeft==0) {
-			playerturn.setText(GAME_END_NOWINNER);
+			gameModel.setFinalResult(RowGameModel.GAME_END_NOWINNER);
+		    }
+		    if (gameModel.getFinalResult() != null) {
+			playerturn.setText(gameModel.getFinalResult());
 		    }
 		}
 	    }
