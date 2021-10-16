@@ -1,5 +1,4 @@
 # TicTacToe
-TicTacToeGame.java and TicTacToeBlock.java are a basic Java implementation of the Tic Tac Toe game.
 
 ### How to build and test (from Terminal):
 
