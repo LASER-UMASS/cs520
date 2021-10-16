@@ -15,14 +15,6 @@ public class RowGameController {
     public RowGameGUI gameView;
 
     /**
-     * Starts a new game in the GUI.
-     */
-    public static void main(String[] args) {
-        RowGameController game = new RowGameController();
-        game.gameView.gui.setVisible(true);
-    }
-
-    /**
      * Creates a new game initializing the GUI.
      */
     public RowGameController() {
