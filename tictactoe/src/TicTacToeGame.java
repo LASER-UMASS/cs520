@@ -16,15 +16,10 @@ public class TicTacToeGame {
     public static final String GAME_END_NOWINNER = "Game ends in a draw";
 
     public JFrame gui = new JFrame("Tic Tac Toe");
-    public TicTacToeBlock[][] blocksData = new TicTacToeBlock[3][3];
+    public RowGameModel gameModel = new RowGameModel();
     public JButton[][] blocks = new JButton[3][3];
     public JButton reset = new JButton("Reset");
     public JTextArea playerturn = new JTextArea();
-    /**
-     * The current player taking their turn
-     */
-    public String player = "1";
-    public int movesLeft = 9;
 
     /**
      * Starts a new game in the GUI.
@@ -67,10 +62,6 @@ public class TicTacToeGame {
         // Initialize a JButton for each cell of the 3x3 game board.
         for(int row = 0; row<3; row++) {
             for(int column = 0; column<3 ;column++) {
-		blocksData[row][column] = new TicTacToeBlock(this);
-		// The last row contains the legal moves
-		blocksData[row][column].setContents("");
-		blocksData[row][column].setIsLegalMove(true);
                 blocks[row][column] = new JButton();
                 blocks[row][column].setPreferredSize(new Dimension(75,75));
 		updateBlock(row,column);
@@ -90,165 +81,165 @@ public class TicTacToeGame {
      * @param block The block to be moved to by the current player
      */
     protected void move(JButton block) {
-	--movesLeft;
-	if(movesLeft%2 == 1) {
+	gameModel.movesLeft--;
+	if(gameModel.movesLeft%2 == 1) {
 	    playerturn.setText("'X': Player 1");
 	} else{
 	    playerturn.setText("'O': Player 2");
 	}
 	
-	if(player.equals("1")) {
+	if(gameModel.player.equals("1")) {
 	    // Check whether player 1 won
 	    if(block==blocks[0][0]) {
-		blocksData[0][0].setContents("X");
+		gameModel.blocksData[0][0].setContents("X");
 		updateBlock(0,0);
-		player = "2";
-		if(movesLeft<7) {
-		    if((blocksData[0][0].getContents().equals(blocksData[0][1].getContents()) &&
-			blocksData[0][1].getContents().equals(blocksData[0][2].getContents())) ||
-		       (blocksData[0][0].getContents().equals(blocksData[1][0].getContents()) &&
-			blocksData[1][0].getContents().equals(blocksData[2][0].getContents())) ||
-		       (blocksData[0][0].getContents().equals(blocksData[1][1].getContents()) &&
-			blocksData[1][1].getContents().equals(blocksData[2][2].getContents()))) {
+		gameModel.player = "2";
+		if(gameModel.movesLeft<7) {
+		    if((gameModel.blocksData[0][0].getContents().equals(gameModel.blocksData[0][1].getContents()) &&
+			gameModel.blocksData[0][1].getContents().equals(gameModel.blocksData[0][2].getContents())) ||
+		       (gameModel.blocksData[0][0].getContents().equals(gameModel.blocksData[1][0].getContents()) &&
+			gameModel.blocksData[1][0].getContents().equals(gameModel.blocksData[2][0].getContents())) ||
+		       (gameModel.blocksData[0][0].getContents().equals(gameModel.blocksData[1][1].getContents()) &&
+			gameModel.blocksData[1][1].getContents().equals(gameModel.blocksData[2][2].getContents()))) {
 			playerturn.setText("Player 1 wins!");
 			endGame();
-		    } else if(movesLeft==0) {
+		    } else if(gameModel.movesLeft==0) {
 			playerturn.setText(GAME_END_NOWINNER);
 		    }
 		}
 	    } else if(block==blocks[0][1]) {
-		blocksData[0][1].setContents("X");
+		gameModel.blocksData[0][1].setContents("X");
 		updateBlock(0,1);
-		player = "2";
-		if(movesLeft<7) {
-		    if((blocksData[0][1].getContents().equals(blocksData[0][0].getContents()) &&
-			blocksData[0][0].getContents().equals(blocksData[0][2].getContents())) ||
-		       (blocksData[0][1].getContents().equals(blocksData[1][1].getContents()) &&
-			blocksData[1][1].getContents().equals(blocksData[2][1].getContents()))) {
+		gameModel.player = "2";
+		if(gameModel.movesLeft<7) {
+		    if((gameModel.blocksData[0][1].getContents().equals(gameModel.blocksData[0][0].getContents()) &&
+			gameModel.blocksData[0][0].getContents().equals(gameModel.blocksData[0][2].getContents())) ||
+		       (gameModel.blocksData[0][1].getContents().equals(gameModel.blocksData[1][1].getContents()) &&
+			gameModel.blocksData[1][1].getContents().equals(gameModel.blocksData[2][1].getContents()))) {
 			playerturn.setText("Player 1 wins!");
 			endGame();
-		    } else if(movesLeft==0) {
+		    } else if(gameModel.movesLeft==0) {
 			playerturn.setText(GAME_END_NOWINNER);
 		    }
 		}
 	    } else if(block==blocks[0][2]) {
-		blocksData[0][2].setContents("X");
+		gameModel.blocksData[0][2].setContents("X");
 		updateBlock(0,2);
-		player = "2";
-		if(movesLeft<7) {
-		    if((blocksData[0][2].getContents().equals(blocksData[0][1].getContents()) &&
-			blocksData[0][1].getContents().equals(blocksData[0][0].getContents())) ||
-		       (blocksData[0][2].getContents().equals(blocksData[1][2].getContents()) &&
-			blocksData[1][2].getContents().equals(blocksData[2][2].getContents())) ||
-		       (blocksData[0][2].getContents().equals(blocksData[1][1].getContents()) &&
-			blocksData[1][1].getContents().equals(blocksData[2][0].getContents()))) {
+		gameModel.player = "2";
+		if(gameModel.movesLeft<7) {
+		    if((gameModel.blocksData[0][2].getContents().equals(gameModel.blocksData[0][1].getContents()) &&
+			gameModel.blocksData[0][1].getContents().equals(gameModel.blocksData[0][0].getContents())) ||
+		       (gameModel.blocksData[0][2].getContents().equals(gameModel.blocksData[1][2].getContents()) &&
+			gameModel.blocksData[1][2].getContents().equals(gameModel.blocksData[2][2].getContents())) ||
+		       (gameModel.blocksData[0][2].getContents().equals(gameModel.blocksData[1][1].getContents()) &&
+			gameModel.blocksData[1][1].getContents().equals(gameModel.blocksData[2][0].getContents()))) {
 			playerturn.setText("Player 1 wins!");
 			endGame();
-		    } else if(movesLeft==0) {
+		    } else if(gameModel.movesLeft==0) {
 			playerturn.setText(GAME_END_NOWINNER);
 		    }
 		}
 	    } else if(block==blocks[1][0]) {
-		blocksData[1][0].setContents("X");
+		gameModel.blocksData[1][0].setContents("X");
 		updateBlock(1,0);
 		updateBlock(0,0);
-		player = "2";
-		if(movesLeft<7) {
-		    if((blocksData[1][0].getContents().equals(blocksData[1][1].getContents()) &&
-			blocksData[1][1].getContents().equals(blocksData[1][2].getContents())) ||
-		       (blocksData[1][0].getContents().equals(blocksData[0][0].getContents()) &&
-			blocksData[0][0].getContents().equals(blocksData[2][0].getContents()))) {
+		gameModel.player = "2";
+		if(gameModel.movesLeft<7) {
+		    if((gameModel.blocksData[1][0].getContents().equals(gameModel.blocksData[1][1].getContents()) &&
+			gameModel.blocksData[1][1].getContents().equals(gameModel.blocksData[1][2].getContents())) ||
+		       (gameModel.blocksData[1][0].getContents().equals(gameModel.blocksData[0][0].getContents()) &&
+			gameModel.blocksData[0][0].getContents().equals(gameModel.blocksData[2][0].getContents()))) {
 			playerturn.setText("Player 1 wins!");
 			endGame();
-		    } else if(movesLeft==0) {
+		    } else if(gameModel.movesLeft==0) {
 			playerturn.setText(GAME_END_NOWINNER);
 		    }
 		}
 	    } else if(block==blocks[1][1]) {
-		blocksData[1][1].setContents("X");
+		gameModel.blocksData[1][1].setContents("X");
 		updateBlock(1,1);
 		updateBlock(0,1);
-		player = "2";
-		if(movesLeft<7) {
-		    if((blocksData[1][1].getContents().equals(blocksData[1][0].getContents()) &&
-			blocksData[1][0].getContents().equals(blocksData[1][2].getContents())) ||
-		       (blocksData[1][1].getContents().equals(blocksData[0][1].getContents()) &&
-			blocksData[0][1].getContents().equals(blocksData[2][1].getContents())) ||
-		       (blocksData[1][1].getContents().equals(blocksData[0][0].getContents()) &&
-			blocksData[0][0].getContents().equals(blocksData[2][2].getContents())) ||
-		       (blocksData[1][1].getContents().equals(blocksData[0][2].getContents()) &&
-			blocksData[0][2].getContents().equals(blocksData[2][0].getContents()))) {
+		gameModel.player = "2";
+		if(gameModel.movesLeft<7) {
+		    if((gameModel.blocksData[1][1].getContents().equals(gameModel.blocksData[1][0].getContents()) &&
+			gameModel.blocksData[1][0].getContents().equals(gameModel.blocksData[1][2].getContents())) ||
+		       (gameModel.blocksData[1][1].getContents().equals(gameModel.blocksData[0][1].getContents()) &&
+			gameModel.blocksData[0][1].getContents().equals(gameModel.blocksData[2][1].getContents())) ||
+		       (gameModel.blocksData[1][1].getContents().equals(gameModel.blocksData[0][0].getContents()) &&
+			gameModel.blocksData[0][0].getContents().equals(gameModel.blocksData[2][2].getContents())) ||
+		       (gameModel.blocksData[1][1].getContents().equals(gameModel.blocksData[0][2].getContents()) &&
+			gameModel.blocksData[0][2].getContents().equals(gameModel.blocksData[2][0].getContents()))) {
 			playerturn.setText("Player 1 wins!");
 			endGame();
-		    } else if(movesLeft==0) {
+		    } else if(gameModel.movesLeft==0) {
 			playerturn.setText(GAME_END_NOWINNER);
 		    }
 		}
 	    } else if(block==blocks[1][2]) {
-		blocksData[1][2].setContents("X");
+		gameModel.blocksData[1][2].setContents("X");
 		updateBlock(1,2);
 		updateBlock(0,2);
-		player = "2";
-		if(movesLeft<7) {
-		    if((blocksData[1][2].getContents().equals(blocksData[0][2].getContents()) &&
-			blocksData[0][2].getContents().equals(blocksData[2][2].getContents())) ||
-		       (blocksData[1][2].getContents().equals(blocksData[1][1].getContents()) &&
-			blocksData[1][1].getContents().equals(blocksData[1][0].getContents()))) {
+		gameModel.player = "2";
+		if(gameModel.movesLeft<7) {
+		    if((gameModel.blocksData[1][2].getContents().equals(gameModel.blocksData[0][2].getContents()) &&
+			gameModel.blocksData[0][2].getContents().equals(gameModel.blocksData[2][2].getContents())) ||
+		       (gameModel.blocksData[1][2].getContents().equals(gameModel.blocksData[1][1].getContents()) &&
+			gameModel.blocksData[1][1].getContents().equals(gameModel.blocksData[1][0].getContents()))) {
 			playerturn.setText("Player 1 wins!");
 			endGame();
-		    } else if(movesLeft==0) {
+		    } else if(gameModel.movesLeft==0) {
 			playerturn.setText(GAME_END_NOWINNER);
 		    }
 		}
 	    } else if(block==blocks[2][0]) {
-		blocksData[2][0].setContents("X");
+		gameModel.blocksData[2][0].setContents("X");
 		updateBlock(2,0);
 		updateBlock(1,0);
-		player = "2";
-		if(movesLeft<7) {
-		    if((blocksData[2][0].getContents().equals(blocksData[2][1].getContents()) &&
-			blocksData[2][1].getContents().equals(blocksData[2][2].getContents())) ||
-		       (blocksData[2][0].getContents().equals(blocksData[1][0].getContents()) &&
-			blocksData[1][0].getContents().equals(blocksData[0][0].getContents())) ||
-		       (blocksData[2][0].getContents().equals(blocksData[1][1].getContents()) &&
-			blocksData[1][1].getContents().equals(blocksData[0][2].getContents()))) {
+		gameModel.player = "2";
+		if(gameModel.movesLeft<7) {
+		    if((gameModel.blocksData[2][0].getContents().equals(gameModel.blocksData[2][1].getContents()) &&
+			gameModel.blocksData[2][1].getContents().equals(gameModel.blocksData[2][2].getContents())) ||
+		       (gameModel.blocksData[2][0].getContents().equals(gameModel.blocksData[1][0].getContents()) &&
+			gameModel.blocksData[1][0].getContents().equals(gameModel.blocksData[0][0].getContents())) ||
+		       (gameModel.blocksData[2][0].getContents().equals(gameModel.blocksData[1][1].getContents()) &&
+			gameModel.blocksData[1][1].getContents().equals(gameModel.blocksData[0][2].getContents()))) {
 			playerturn.setText("Player 1 wins!");
 			endGame();
-		    } else if(movesLeft==0) {
+		    } else if(gameModel.movesLeft==0) {
 			playerturn.setText(GAME_END_NOWINNER);
 		    }
 		}
 	    } else if(block==blocks[2][1]) {
-		blocksData[2][1].setContents("X");
+		gameModel.blocksData[2][1].setContents("X");
 		updateBlock(2,1);
 		updateBlock(1,1);
-		player = "2";
-		if(movesLeft<7) {
-		    if((blocksData[2][1].getContents().equals(blocksData[2][0].getContents()) &&
-			blocksData[2][0].getContents().equals(blocksData[2][2].getContents())) ||
-		       (blocksData[2][1].getContents().equals(blocksData[1][1].getContents()) &&
-			blocksData[1][1].getContents().equals(blocksData[0][1].getContents()))) {
+		gameModel.player = "2";
+		if(gameModel.movesLeft<7) {
+		    if((gameModel.blocksData[2][1].getContents().equals(gameModel.blocksData[2][0].getContents()) &&
+			gameModel.blocksData[2][0].getContents().equals(gameModel.blocksData[2][2].getContents())) ||
+		       (gameModel.blocksData[2][1].getContents().equals(gameModel.blocksData[1][1].getContents()) &&
+			gameModel.blocksData[1][1].getContents().equals(gameModel.blocksData[0][1].getContents()))) {
 			playerturn.setText("Player 1 wins!");
 			endGame();
-		    } else if(movesLeft==0) {
+		    } else if(gameModel.movesLeft==0) {
 			playerturn.setText(GAME_END_NOWINNER);
 		    }
 		}
 	    } else if(block==blocks[2][2]) {
-		blocksData[2][2].setContents("X");
+		gameModel.blocksData[2][2].setContents("X");
 		updateBlock(2,2);
 		updateBlock(1,2);
-		player = "2";
-		if(movesLeft<7) {
-		    if((blocksData[2][2].getContents().equals(blocksData[2][1].getContents()) &&
-			blocksData[2][1].getContents().equals(blocksData[2][0].getContents())) ||
-		       (blocksData[2][2].getContents().equals(blocksData[1][2].getContents()) &&
-			blocksData[1][2].getContents().equals(blocksData[0][2].getContents())) ||
-		       (blocksData[2][2].getContents().equals(blocksData[1][1].getContents()) &&
-			blocksData[1][1].getContents().equals(blocksData[0][0].getContents()))) {
+		gameModel.player = "2";
+		if(gameModel.movesLeft<7) {
+		    if((gameModel.blocksData[2][2].getContents().equals(gameModel.blocksData[2][1].getContents()) &&
+			gameModel.blocksData[2][1].getContents().equals(gameModel.blocksData[2][0].getContents())) ||
+		       (gameModel.blocksData[2][2].getContents().equals(gameModel.blocksData[1][2].getContents()) &&
+			gameModel.blocksData[1][2].getContents().equals(gameModel.blocksData[0][2].getContents())) ||
+		       (gameModel.blocksData[2][2].getContents().equals(gameModel.blocksData[1][1].getContents()) &&
+			gameModel.blocksData[1][1].getContents().equals(gameModel.blocksData[0][0].getContents()))) {
 			playerturn.setText("Player 1 wins!");
 			endGame();
-		    } else if(movesLeft==0) {
+		    } else if(gameModel.movesLeft==0) {
 			playerturn.setText(GAME_END_NOWINNER);
 		    }
 		}
@@ -256,155 +247,155 @@ public class TicTacToeGame {
 	} else {
 	    // Check whether player 2 won
 	    if(block==blocks[0][0]) {
-		blocksData[0][0].setContents("O");
+		gameModel.blocksData[0][0].setContents("O");
 		updateBlock(0,0);
-		player = "1";
-		if(movesLeft<7) {
-		    if((blocksData[0][0].getContents().equals(blocksData[0][1].getContents()) &&
-			blocksData[0][1].getContents().equals(blocksData[0][2].getContents())) ||
-		       (blocksData[0][0].getContents().equals(blocksData[1][0].getContents()) &&
-			blocksData[1][0].getContents().equals(blocksData[2][0].getContents())) ||
-		       (blocksData[0][0].getContents().equals(blocksData[1][1].getContents()) &&
-			blocksData[1][1].getContents().equals(blocksData[2][2].getContents()))) {
+		gameModel.player = "1";
+		if(gameModel.movesLeft<7) {
+		    if((gameModel.blocksData[0][0].getContents().equals(gameModel.blocksData[0][1].getContents()) &&
+			gameModel.blocksData[0][1].getContents().equals(gameModel.blocksData[0][2].getContents())) ||
+		       (gameModel.blocksData[0][0].getContents().equals(gameModel.blocksData[1][0].getContents()) &&
+			gameModel.blocksData[1][0].getContents().equals(gameModel.blocksData[2][0].getContents())) ||
+		       (gameModel.blocksData[0][0].getContents().equals(gameModel.blocksData[1][1].getContents()) &&
+			gameModel.blocksData[1][1].getContents().equals(gameModel.blocksData[2][2].getContents()))) {
 			playerturn.setText("Player 2 wins!");
 			endGame();
-		    } else if(movesLeft==0) {
+		    } else if(gameModel.movesLeft==0) {
 			playerturn.setText(GAME_END_NOWINNER);
 		    }
 		}
 	    } else if(block==blocks[0][1]) {
-		blocksData[0][1].setContents("O");
+		gameModel.blocksData[0][1].setContents("O");
 		updateBlock(0,1);
-		player = "1";
-		if(movesLeft<7) {
-		    if((blocksData[0][1].getContents().equals(blocksData[0][0].getContents()) &&
-			blocksData[0][0].getContents().equals(blocksData[0][2].getContents())) ||
-		       (blocksData[0][1].getContents().equals(blocksData[1][1].getContents()) &&
-			blocksData[1][1].getContents().equals(blocksData[2][1].getContents()))) {
+		gameModel.player = "1";
+		if(gameModel.movesLeft<7) {
+		    if((gameModel.blocksData[0][1].getContents().equals(gameModel.blocksData[0][0].getContents()) &&
+			gameModel.blocksData[0][0].getContents().equals(gameModel.blocksData[0][2].getContents())) ||
+		       (gameModel.blocksData[0][1].getContents().equals(gameModel.blocksData[1][1].getContents()) &&
+			gameModel.blocksData[1][1].getContents().equals(gameModel.blocksData[2][1].getContents()))) {
 			playerturn.setText("Player 2 wins!");
 			endGame();
-		    } else if(movesLeft==0) {
+		    } else if(gameModel.movesLeft==0) {
 			playerturn.setText(GAME_END_NOWINNER);
 		    }
 		}
 	    } else if(block==blocks[0][2]) {
-		blocksData[0][2].setContents("O");
+		gameModel.blocksData[0][2].setContents("O");
 		updateBlock(0,2);
-		player = "1";
-		if(movesLeft<7) {
-		    if((blocksData[0][2].getContents().equals(blocksData[0][1].getContents()) &&
-			blocksData[0][1].getContents().equals(blocksData[0][0].getContents())) ||
-		       (blocksData[0][2].getContents().equals(blocksData[1][2].getContents()) &&
-			blocksData[1][2].getContents().equals(blocksData[2][2].getContents())) ||
-		       (blocksData[0][2].getContents().equals(blocksData[1][1].getContents()) &&
-			blocksData[1][1].getContents().equals(blocksData[2][0].getContents()))) {
+		gameModel.player = "1";
+		if(gameModel.movesLeft<7) {
+		    if((gameModel.blocksData[0][2].getContents().equals(gameModel.blocksData[0][1].getContents()) &&
+			gameModel.blocksData[0][1].getContents().equals(gameModel.blocksData[0][0].getContents())) ||
+		       (gameModel.blocksData[0][2].getContents().equals(gameModel.blocksData[1][2].getContents()) &&
+			gameModel.blocksData[1][2].getContents().equals(gameModel.blocksData[2][2].getContents())) ||
+		       (gameModel.blocksData[0][2].getContents().equals(gameModel.blocksData[1][1].getContents()) &&
+			gameModel.blocksData[1][1].getContents().equals(gameModel.blocksData[2][0].getContents()))) {
 			playerturn.setText("Player 2 wins!");
 			endGame();
-		    } else if(movesLeft==0) {
+		    } else if(gameModel.movesLeft==0) {
 			playerturn.setText(GAME_END_NOWINNER);
 		    }
 		}
 	    } else if(block==blocks[1][0]) {
-		blocksData[1][0].setContents("O");
+		gameModel.blocksData[1][0].setContents("O");
 		updateBlock(1,0);
 		updateBlock(0,0);
-		player = "1";
-		if(movesLeft<7) {
-		    if((blocksData[1][0].getContents().equals(blocksData[1][1].getContents()) &&
-			blocksData[1][1].getContents().equals(blocksData[1][2].getContents())) ||
-		       (blocksData[1][0].getContents().equals(blocksData[0][0].getContents()) &&
-			blocksData[0][0].getContents().equals(blocksData[2][0].getContents()))) {
+		gameModel.player = "1";
+		if(gameModel.movesLeft<7) {
+		    if((gameModel.blocksData[1][0].getContents().equals(gameModel.blocksData[1][1].getContents()) &&
+			gameModel.blocksData[1][1].getContents().equals(gameModel.blocksData[1][2].getContents())) ||
+		       (gameModel.blocksData[1][0].getContents().equals(gameModel.blocksData[0][0].getContents()) &&
+			gameModel.blocksData[0][0].getContents().equals(gameModel.blocksData[2][0].getContents()))) {
 			playerturn.setText("Player 2 wins!");
 			endGame();
-		    } else if(movesLeft==0) {
+		    } else if(gameModel.movesLeft==0) {
 			playerturn.setText(GAME_END_NOWINNER);
 		    }
 		}
 	    } else if(block==blocks[1][1]) {
-		blocksData[1][1].setContents("O");
+		gameModel.blocksData[1][1].setContents("O");
 		updateBlock(1,1);
 		updateBlock(0,1);
-		player = "1";
-		if(movesLeft<7) {
-		    if((blocksData[1][1].getContents().equals(blocksData[1][0].getContents()) &&
-			blocksData[1][0].getContents().equals(blocksData[1][2].getContents())) ||
-		       (blocksData[1][1].getContents().equals(blocksData[0][1].getContents()) &&
-			blocksData[0][1].getContents().equals(blocksData[2][1].getContents())) ||
-		       (blocksData[1][1].getContents().equals(blocksData[0][0].getContents()) &&
-			blocksData[0][0].getContents().equals(blocksData[2][2].getContents())) ||
-		       (blocksData[1][1].getContents().equals(blocksData[0][2].getContents()) &&
-			blocksData[0][2].getContents().equals(blocksData[2][0].getContents()))) {
+		gameModel.player = "1";
+		if(gameModel.movesLeft<7) {
+		    if((gameModel.blocksData[1][1].getContents().equals(gameModel.blocksData[1][0].getContents()) &&
+			gameModel.blocksData[1][0].getContents().equals(gameModel.blocksData[1][2].getContents())) ||
+		       (gameModel.blocksData[1][1].getContents().equals(gameModel.blocksData[0][1].getContents()) &&
+			gameModel.blocksData[0][1].getContents().equals(gameModel.blocksData[2][1].getContents())) ||
+		       (gameModel.blocksData[1][1].getContents().equals(gameModel.blocksData[0][0].getContents()) &&
+			gameModel.blocksData[0][0].getContents().equals(gameModel.blocksData[2][2].getContents())) ||
+		       (gameModel.blocksData[1][1].getContents().equals(gameModel.blocksData[0][2].getContents()) &&
+			gameModel.blocksData[0][2].getContents().equals(gameModel.blocksData[2][0].getContents()))) {
 			playerturn.setText("Player 2 wins!");
 			endGame();
-		    } else if(movesLeft==0) {
+		    } else if(gameModel.movesLeft==0) {
 			playerturn.setText(GAME_END_NOWINNER);
 		    }
 		}
 	    } else if(block==blocks[1][2]) {
-		blocksData[1][2].setContents("O");
+		gameModel.blocksData[1][2].setContents("O");
 		updateBlock(1,2);
 		updateBlock(0,2);
-		player = "1";
-		if(movesLeft<7) {
-		    if((blocksData[1][2].getContents().equals(blocksData[0][2].getContents()) &&
-			blocksData[0][2].getContents().equals(blocksData[2][2].getContents())) ||
-		       (blocksData[1][2].getContents().equals(blocksData[1][1].getContents()) &&
-			blocksData[1][1].getContents().equals(blocksData[1][0].getContents()))) {
+		gameModel.player = "1";
+		if(gameModel.movesLeft<7) {
+		    if((gameModel.blocksData[1][2].getContents().equals(gameModel.blocksData[0][2].getContents()) &&
+			gameModel.blocksData[0][2].getContents().equals(gameModel.blocksData[2][2].getContents())) ||
+		       (gameModel.blocksData[1][2].getContents().equals(gameModel.blocksData[1][1].getContents()) &&
+			gameModel.blocksData[1][1].getContents().equals(gameModel.blocksData[1][0].getContents()))) {
 			playerturn.setText("Player 2 wins!");
 			endGame();
-		    } else if(movesLeft==0) {
+		    } else if(gameModel.movesLeft==0) {
 			playerturn.setText(GAME_END_NOWINNER);
 		    }
 		}
 	    } else if(block==blocks[2][0]) {
-		blocksData[2][0].setContents("O");
+		gameModel.blocksData[2][0].setContents("O");
 		updateBlock(2,0);
 		updateBlock(1,0);
-		player = "1";
-		if(movesLeft<7) {
-		    if((blocksData[2][0].getContents().equals(blocksData[2][1].getContents()) &&
-			blocksData[2][1].getContents().equals(blocksData[2][2].getContents())) ||
-		       (blocksData[2][0].getContents().equals(blocksData[1][0].getContents()) &&
-			blocksData[1][0].getContents().equals(blocksData[0][0].getContents())) ||
-		       (blocksData[2][0].getContents().equals(blocksData[1][1].getContents()) &&
-			blocksData[1][1].getContents().equals(blocksData[0][2].getContents()))) {
+		gameModel.player = "1";
+		if(gameModel.movesLeft<7) {
+		    if((gameModel.blocksData[2][0].getContents().equals(gameModel.blocksData[2][1].getContents()) &&
+			gameModel.blocksData[2][1].getContents().equals(gameModel.blocksData[2][2].getContents())) ||
+		       (gameModel.blocksData[2][0].getContents().equals(gameModel.blocksData[1][0].getContents()) &&
+			gameModel.blocksData[1][0].getContents().equals(gameModel.blocksData[0][0].getContents())) ||
+		       (gameModel.blocksData[2][0].getContents().equals(gameModel.blocksData[1][1].getContents()) &&
+			gameModel.blocksData[1][1].getContents().equals(gameModel.blocksData[0][2].getContents()))) {
 			playerturn.setText("Player 2 wins!");
 			endGame();
-		    } else if(movesLeft==0) {
+		    } else if(gameModel.movesLeft==0) {
 			playerturn.setText(GAME_END_NOWINNER);
 		    }
 		}
 	    } else if(block==blocks[2][1]) {
-		blocksData[2][1].setContents("O");
+		gameModel.blocksData[2][1].setContents("O");
 		updateBlock(2,1);
 		updateBlock(1,1);
-		player = "1";
-		if(movesLeft<7) {
-		    if((blocksData[2][1].getContents().equals(blocksData[2][0].getContents()) &&
-			blocksData[2][0].getContents().equals(blocksData[2][2].getContents())) ||
-		       (blocksData[2][1].getContents().equals(blocksData[1][1].getContents()) &&
-			blocksData[1][1].getContents().equals(blocksData[0][1].getContents()))) {
+		gameModel.player = "1";
+		if(gameModel.movesLeft<7) {
+		    if((gameModel.blocksData[2][1].getContents().equals(gameModel.blocksData[2][0].getContents()) &&
+			gameModel.blocksData[2][0].getContents().equals(gameModel.blocksData[2][2].getContents())) ||
+		       (gameModel.blocksData[2][1].getContents().equals(gameModel.blocksData[1][1].getContents()) &&
+			gameModel.blocksData[1][1].getContents().equals(gameModel.blocksData[0][1].getContents()))) {
 			playerturn.setText("Player 2 wins!");
 			endGame();
-		    } else if(movesLeft==0) {
+		    } else if(gameModel.movesLeft==0) {
 			playerturn.setText(GAME_END_NOWINNER);
 		    }
 		}
 	    } else if(block==blocks[2][2]) {
-		blocksData[2][2].setContents("O");
+		gameModel.blocksData[2][2].setContents("O");
 		updateBlock(2,2);
 		updateBlock(1,2);
-		player = "1";
-		if(movesLeft<7) {
-		    if((blocksData[2][2].getContents().equals(blocksData[2][1].getContents()) &&
-			blocksData[2][1].getContents().equals(blocksData[2][0].getContents())) ||
-		       (blocksData[2][2].getContents().equals(blocksData[1][2].getContents()) &&
-			blocksData[1][2].getContents().equals(blocksData[0][2].getContents())) ||
-		       (blocksData[2][2].getContents().equals(blocksData[1][1].getContents()) &&
-			blocksData[1][1].getContents().equals(blocksData[0][0].getContents()))) {
+		gameModel.player = "1";
+		if(gameModel.movesLeft<7) {
+		    if((gameModel.blocksData[2][2].getContents().equals(gameModel.blocksData[2][1].getContents()) &&
+			gameModel.blocksData[2][1].getContents().equals(gameModel.blocksData[2][0].getContents())) ||
+		       (gameModel.blocksData[2][2].getContents().equals(gameModel.blocksData[1][2].getContents()) &&
+			gameModel.blocksData[1][2].getContents().equals(gameModel.blocksData[0][2].getContents())) ||
+		       (gameModel.blocksData[2][2].getContents().equals(gameModel.blocksData[1][1].getContents()) &&
+			gameModel.blocksData[1][1].getContents().equals(gameModel.blocksData[0][0].getContents()))) {
 			playerturn.setText("Player 2 wins!");
 			endGame();
-		    } else if(movesLeft==0) {
+		    } else if(gameModel.movesLeft==0) {
 			playerturn.setText(GAME_END_NOWINNER);
 		    }
 		}
@@ -420,8 +411,8 @@ public class TicTacToeGame {
      * @param column The column that contains the block
      */
     protected void updateBlock(int row, int column) {
-	blocks[row][column].setText(blocksData[row][column].getContents());
-	blocks[row][column].setEnabled(blocksData[row][column].getIsLegalMove());
+	blocks[row][column].setText(gameModel.blocksData[row][column].getContents());
+	blocks[row][column].setEnabled(gameModel.blocksData[row][column].getIsLegalMove());
     }
 
     /**
@@ -441,13 +432,13 @@ public class TicTacToeGame {
     public void resetGame() {
         for(int row = 0;row<3;row++) {
             for(int column = 0;column<3;column++) {
-                blocksData[row][column].reset();
-		blocksData[row][column].setIsLegalMove(true);
+                gameModel.blocksData[row][column].reset();
+		gameModel.blocksData[row][column].setIsLegalMove(true);
 		updateBlock(row,column);
             }
         }
-        player = "1";
-        movesLeft = 9;
+        gameModel.player = "1";
+        gameModel.movesLeft = 9;
         playerturn.setText("Player 1 to play 'X'");
     }
 }
