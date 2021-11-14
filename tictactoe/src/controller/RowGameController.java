@@ -424,6 +424,7 @@ public class RowGameController {
         }
         gameModel.player = "1";
         gameModel.movesLeft = 9;
+	gameModel.setFinalResult(null);
         gameView.playerturn.setText("Player 1 to play 'X'");
     }
 }
