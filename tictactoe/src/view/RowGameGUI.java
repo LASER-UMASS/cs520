@@ -12,6 +12,9 @@ import controller.RowGameController;
 
 public class RowGameGUI implements RowGameView {
     public JFrame gui = new JFrame("Tic Tac Toe");
+    // This GUI applies the Composite design pattern.
+    // The GUI is the Composite. The following two 
+    // Views are the Components.
     public RowBoardGameView boardGameView;
     public RowGameStatusView statusView;
     public JButton reset = new JButton("Reset");
