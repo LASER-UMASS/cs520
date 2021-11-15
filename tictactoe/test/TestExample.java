@@ -60,7 +60,7 @@ public class TestExample {
 	// Check the pre-conditions (i.e. class invariants)
 	this.checkInitialConfiguration();
 	// Execute the method under test
-	game.move(game.gameView.blocks[0][0]);
+	game.move(game.gameView.boardGameView.blocks[0][0]);
 	// Check the post-conditions (i.e. class invariants)
 	assertEquals(Player.PLAYER_2, game.gameModel.getPlayer());
 	assertEquals(8, game.gameModel.getMovesLeft());
@@ -76,13 +76,13 @@ public class TestExample {
         // Check the pre-conditions (i.e. class invariants)
 	//
 	// Execute a legal move
-        game.move(game.gameView.blocks[0][0]);
+        game.move(game.gameView.boardGameView.blocks[0][0]);
         assertEquals(Player.PLAYER_2, game.gameModel.getPlayer());
         assertEquals(8, game.gameModel.getMovesLeft());
         assertEquals("X", game.gameModel.blocksData[0][0].getContents());
         assertEquals(false, game.gameModel.blocksData[0][0].getIsLegalMove());
 	// Execute an illegal move
-	game.move(game.gameView.blocks[0][0]);
+	game.move(game.gameView.boardGameView.blocks[0][0]);
 	// Check the post-conditions (i.e. class invariants)
         assertEquals(Player.PLAYER_2, game.gameModel.getPlayer());
         assertEquals(8, game.gameModel.getMovesLeft());
