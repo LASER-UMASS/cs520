@@ -7,12 +7,12 @@ import javax.swing.JPanel;
 import java.awt.*;
 import java.awt.event.*;
 
+import model.Player;
 import model.RowGameModel;
 import controller.RowGameController;
 
-public class RowGameGUI {
+public class RowGameGUI implements RowGameView {
     public JFrame gui = new JFrame("Tic Tac Toe");
-    public RowGameModel gameModel = new RowGameModel();
     public JButton[][] blocks = new JButton[3][3];
     public JButton reset = new JButton("Reset");
     public JTextArea playerturn = new JTextArea();
@@ -73,5 +73,24 @@ public class RowGameGUI {
     public void updateBlock(RowGameModel gameModel, int row, int column) {
 	blocks[row][column].setText(gameModel.blocksData[row][column].getContents());
 	blocks[row][column].setEnabled(gameModel.blocksData[row][column].getIsLegalMove());
+    }
+
+    public void update(RowGameModel gameModel) {
+	for (int row = 0; row < 3; row++) {
+	    for (int col = 0; col < 3; col++) {
+		this.updateBlock(gameModel, row, col);
+	    } // end for col
+	} // end for row
+
+	if (gameModel.getFinalResult() == null) {
+	    if(gameModel.getMovesLeft()%2 == 1) {
+	        playerturn.setText("'X': " + Player.PLAYER_1.getLabel());
+	    } else{
+		playerturn.setText("'O': " + Player.PLAYER_2.getLabel());
+	    }
+	}
+	else {
+	    playerturn.setText(gameModel.getFinalResult());
+	}
     }
 }
