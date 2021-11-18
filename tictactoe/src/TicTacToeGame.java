@@ -90,6 +90,8 @@ public class TicTacToeGame {
      * @param block The block to be moved to by the current player
      */
     protected void move(JButton block) {
+	Logger.log("uses");
+	
 	--movesLeft;
 	if(movesLeft%2 == 1) {
 	    playerturn.setText("'X': Player 1");
@@ -439,6 +441,8 @@ public class TicTacToeGame {
      * Resets the game to be able to start playing again.
      */
     public void resetGame() {
+	Logger.log("uses");
+	
         for(int row = 0;row<3;row++) {
             for(int column = 0;column<3;column++) {
                 blocksData[row][column].reset();
