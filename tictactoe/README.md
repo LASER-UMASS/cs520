@@ -12,8 +12,11 @@
 
 ### How to run (from Terminal):
 
-1. After building the project (i.e., running `ant`), run the following command in the tictactoe folder:
-   `java -cp bin RowGameApp`
+1. After building the project (i.e., running `ant`), run the following command in the tictactoe folder to follow the game rules for 'Tic Tac Toe':
+   `java -cp bin RowGameApp TicTacToe`
+
+Run the following command in the tictactoe folder to follow the game rules for 'Three in a Row':
+   `java -cp bin RowGameApp ThreeInARow`
 
 ### How to clean up (from Terminal):
 

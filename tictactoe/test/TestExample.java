@@ -15,7 +15,7 @@ public class TestExample {
 
     @Before
     public void setUp() {
-	game = new RowGameController();
+	game = new RowGameController(RowGameController.TIC_TAC_TOE_GAME_RULES);
     }
 
     @After
