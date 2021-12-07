@@ -22,6 +22,13 @@ public class RowGameController {
 	gameModel = new RowGameModel();
 	gameView = new RowGameGUI(this);
 
+	// Apply the Observer design pattern
+	//
+	// In this case, the RowGameGUI (the composite) is registered.
+	// Alternatively, the RowBoardGameView and RowGameStatusView 
+	// (the components) could be registered.
+	gameModel.register(gameView);
+
 	this.resetGame();
     }
 
@@ -354,7 +361,8 @@ public class RowGameController {
 	    }
 	}
 
-	gameView.update(gameModel);
+	// The Observer design pattern is now doing the following.
+	//gameView.update(gameModel);
     }
 
     /**
@@ -367,7 +375,8 @@ public class RowGameController {
 	    }
 	}
 
-	gameView.update(gameModel);
+	// The Observer design pattern is now doing the following. 
+	//gameView.update(gameModel);
     }
 
     /**
@@ -384,7 +393,7 @@ public class RowGameController {
         gameModel.setMovesLeft(9);
 	gameModel.setFinalResult(null);
 
-
-	gameView.update(gameModel);
+	// The Observer design pattern is now doing the following. 
+	//gameView.update(gameModel);
     }
 }

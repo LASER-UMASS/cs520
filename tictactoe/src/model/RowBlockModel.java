@@ -52,6 +52,7 @@ public class RowBlockModel
 	    throw new IllegalArgumentException("The value must be non-null.");
 	}
 	this.contents = value;
+	this.game.stateChange();
     }
 
     /**
@@ -65,6 +66,7 @@ public class RowBlockModel
 
     public void setIsLegalMove(boolean isLegalMove) {
 	this.isLegalMove = isLegalMove;
+	this.game.stateChange();
     }
 
     public boolean getIsLegalMove() {
@@ -77,5 +79,6 @@ public class RowBlockModel
     public void reset() {
 	this.contents = "";
 	this.isLegalMove = false;
+	this.game.stateChange();
     }
 }

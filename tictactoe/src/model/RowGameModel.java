@@ -1,5 +1,10 @@
 package model;
 
+import view.RowGameView;
+
+import java.util.ArrayList;
+import java.util.List;
+
 
 public class RowGameModel 
 {
@@ -14,6 +19,11 @@ public class RowGameModel
     private int movesLeft = 9;
 
     private String finalResult = null;
+
+    // Apply the Observer design pattern
+    //
+    // The RowGameModel and RowBlockModel are the Observerables.
+    private List<RowGameView> observers = new ArrayList<RowGameView>();
 
 
     public RowGameModel() {
@@ -35,6 +45,7 @@ public class RowGameModel
 	    throw new IllegalArgumentException("The player must be non-null.");
 	}
 	this.player = player;
+	this.stateChange();
     }
 
     public int getMovesLeft() {
@@ -43,6 +54,7 @@ public class RowGameModel
 
     public void setMovesLeft(int movesLeft) {
 	this.movesLeft = movesLeft;
+	this.stateChange();
     }
 
     public String getFinalResult() {
@@ -51,5 +63,20 @@ public class RowGameModel
 
     public void setFinalResult(String finalResult) {
 	this.finalResult = finalResult;
+	this.stateChange();
+    }
+
+    public void register(RowGameView observer) {
+	this.observers.add(observer);
+    }
+
+    public void unregister(RowGameView observer) {
+	this.observers.remove(observer);
+    }
+
+    protected void stateChange() {
+	for (RowGameView currentObserver : this.observers) {
+	    currentObserver.update(this);
+	} // end for currentObserver
     }
 }
