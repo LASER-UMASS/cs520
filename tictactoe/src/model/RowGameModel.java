@@ -40,6 +40,12 @@ public class RowGameModel
 	return this.player;
     }
 
+    /**
+     * Sets the current player to the specified player.
+     *
+     * @param player The specified player
+     * @throws IllegalArgumentException When the specified player is null
+     */
     public void setPlayer(Player player) {
 	if (player == null) {
 	    throw new IllegalArgumentException("The player must be non-null.");
