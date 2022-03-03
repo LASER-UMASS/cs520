@@ -1,1 +1,4 @@
 bin/*
+coverage_results
+.instrumented
+cobertura.ser
