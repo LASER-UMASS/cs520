@@ -12,6 +12,63 @@ import static triangle.Triangle.Type.*;
 public class TriangleTest {
 
     @Test
+    public void constructorTest() {
+        triangle.Triangle a = new triangle.Triangle();
+        assertNotNull(a);
+    }
+
+    @Test
+    public void trianZeroConditional() {
+        Type valid = Triangle.classify(1, 2, 3);
+        Type cTooLong = Triangle.classify(1, 2, 4);
+        Type bTooLong = Triangle.classify(1, 4, 2);
+        Type aTooLong = Triangle.classify(4, 1, 2);
+
+        assertEquals(INVALID, cTooLong);
+        assertEquals(INVALID, aTooLong);
+        assertEquals(INVALID, bTooLong);
+        assertEquals(SCALENE, valid);
+    }
+
+    @Test
+    public void trianNonZeroConditional() {
+        Type abSameInvalid = Triangle.classify(1, 1, 2);
+        Type abSameValid = Triangle.classify(2, 2, 3);
+        Type bcSameInvalid = Triangle.classify(2, 1, 1);
+        Type bcSameValid = Triangle.classify(3, 2, 2);
+        Type acSameInvalid = Triangle.classify(1, 2, 1);
+        Type acSameValid = Triangle.classify(2, 3, 2);
+
+        assertEquals(abSameValid, ISOSCELES);
+        assertEquals(bcSameValid, ISOSCELES);
+        assertEquals(acSameValid, ISOSCELES);
+        assertEquals(abSameInvalid, INVALID);
+        assertEquals(bcSameInvalid, INVALID);
+        assertEquals(acSameInvalid, INVALID);
+    }
+
+    @Test
+    public void invlidTest() {
+        Type Abc = Triangle.classify(-1, 1, 1);
+        Type ABC = Triangle.classify(-1, -1, -1);
+        Type abc = Triangle.classify(1, 1, 1);
+        Type aBc = Triangle.classify(1, -1, 1);
+        Type abC = Triangle.classify(1, 1, -1);
+        Type ABc = Triangle.classify(-1, -1, 1);
+        Type AbC = Triangle.classify(-1, 1, -1);
+        Type aBC = Triangle.classify(1, -1, -1);
+        Type expected = INVALID;
+
+        assertEquals(expected, Abc);
+        assertEquals(expected, aBc);
+        assertEquals(expected, abC);
+        assertEquals(expected, ABc);
+        assertEquals(expected, aBC);
+        assertEquals(expected, AbC);
+        assertEquals(expected, aBC);
+    }
+
+    @Test
     public void equilateral() {
         Type actual = Triangle.classify(10, 10, 10);
         Type expected = EQUILATERAL;
