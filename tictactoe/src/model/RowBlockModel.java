@@ -8,7 +8,7 @@ import model.RowGameModel.Player;
 public class RowBlockModel
 {
     /**
-     * Used enum to distinguish the pieces for each player
+     * Used enum to distinguish the pieces for each player for type safety
      */
     public enum PlayerPiece {
         Empty(""),
