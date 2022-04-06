@@ -2,20 +2,23 @@ package view;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
-import javax.swing.JTextArea;
 import javax.swing.JPanel;
 import java.awt.*;
 import java.awt.event.*;
 
 import model.RowGameModel;
+import view.RowGameStatusView.GameStatus;
 import controller.RowGameController;
 
 public class RowGameGUI {
     public JFrame gui = new JFrame("Tic Tac Toe");
     public RowGameModel gameModel = new RowGameModel();
-    public JButton[][] blocks = new JButton[3][3];
+    //public JButton[][] blocks = new JButton[3][3];
     public JButton reset = new JButton("Reset");
-    public JTextArea playerturn = new JTextArea();
+    //public JTextArea playerturn = new JTextArea();
+    public RowGameBoardView boardView = new RowGameBoardView();
+    public RowGameStatusView statusView = new RowGameStatusView();
+
 
     /**
      * Creates a new game initializing the GUI.
@@ -38,8 +41,8 @@ public class RowGameGUI {
         gui.add(options, BorderLayout.CENTER);
         gui.add(messages, BorderLayout.SOUTH);
 
-        messages.add(playerturn);
-        playerturn.setText("Player 1 to play 'X'");
+        messages.add(statusView.playerturn);
+        this.updateStatus(GameStatus.START);
 
         reset.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
@@ -50,12 +53,12 @@ public class RowGameGUI {
         // Initialize a JButton for each cell of the 3x3 game board.
         for(int row = 0; row<3; row++) {
             for(int column = 0; column<3 ;column++) {
-                blocks[row][column] = new JButton();
-                blocks[row][column].setPreferredSize(new Dimension(75,75));
-                game.add(blocks[row][column]);
-                blocks[row][column].addActionListener(new ActionListener() {
+                boardView.blocks[row][column] = new JButton();
+                boardView.blocks[row][column].setPreferredSize(new Dimension(75,75));
+                game.add(boardView.blocks[row][column]);
+                boardView.blocks[row][column].addActionListener(new ActionListener() {
                     public void actionPerformed(ActionEvent e) {
-			controller.move((JButton)e.getSource());
+			            controller.move((JButton)e.getSource());
                     }
                 });
             }
@@ -71,7 +74,27 @@ public class RowGameGUI {
      * @param column The column that contains the block
      */
     public void updateBlock(RowGameModel gameModel, int row, int column) {
-	blocks[row][column].setText(gameModel.blocksData[row][column].getContents());
-	blocks[row][column].setEnabled(gameModel.blocksData[row][column].getIsLegalMove());
+        this.boardView.update(gameModel, row, column);
+    }
+
+    /**
+     * Gets the block
+     * 
+     * @return block
+     */
+    public JButton[][] getBlocks(){
+        return this.boardView.blocks;
+    }
+
+    public void updateStatus(GameStatus status){
+        statusView.update(status);
+    }
+
+    public void disableButtons(){
+        for(int row = 0;row<3;row++) {
+            for(int column = 0;column<3;column++) {
+            this.getBlocks()[row][column].setEnabled(false);
+            }
+        }
     }
 }
