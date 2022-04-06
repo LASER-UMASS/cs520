@@ -1,19 +1,26 @@
 package model;
 
+import view.RowGameStatusView.GameStatus;
 
 public class RowGameModel 
 {
-    public static final String GAME_END_NOWINNER = "Game ends in a draw";
+    /**
+     * Type safety using enums
+     */
+    public enum Player {
+        One, Two
+    }
+    public static final GameStatus GAME_END_NOWINNER = GameStatus.DRAW;
 
     public RowBlockModel[][] blocksData = new RowBlockModel[3][3];
 
     /**
      * The current player taking their turn
      */
-    public String player = "1";
+    public Player player = Player.One;
     public int movesLeft = 9;
 
-    private String finalResult = null;
+    private GameStatus finalResult = null;
 
 
     public RowGameModel() {
@@ -26,11 +33,11 @@ public class RowGameModel
 	} // end for row
     }
 
-    public String getFinalResult() {
+    public GameStatus getFinalResult() {
 	return this.finalResult;
     }
 
-    public void setFinalResult(String finalResult) {
+    public void setFinalResult(GameStatus finalResult) {
 	this.finalResult = finalResult;
     }
 }
