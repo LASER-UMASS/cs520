@@ -4,7 +4,7 @@
 
 1. Make sure that you have Apache Ant installed. Run each ant command in the tictactoe folder, which contains the `build.xml` build file.
 
-2. Run `ant document` to generate the javadoc (a hypertext description) for all of the java classes. Generated hypertext description will be in the `jdoc` folder. Open the `index.html` file. 
+2. Run `ant document` to generate the javadoc (a hypertext description) for all of the java classes. Generated hypertext description will be in the `jdoc` folder. Open the `index.html` file.
 
 3. Run `ant compile` to compile all of the java classes. Compiled classes will be in the `bin` folder.
 
@@ -18,3 +18,7 @@
 ### How to clean up (from Terminal):
 
 1. Run `ant clean` to clean the project (i.e., delete all generated files).
+
+
+### Specifying modes:
+
