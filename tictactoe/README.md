@@ -1,5 +1,7 @@
 # TicTacToe
 
+This version of TicTacToe has been rewritten to conform to the MVC design pattern, as well as a greater degree of readability, encapsulation, and modularity. Instructions for running the code, application, and test suite remain identical as to when project was cloned (i.e. below commands work).
+
 ### How to build and test (from Terminal):
 
 1. Make sure that you have Apache Ant installed. Run each ant command in the tictactoe folder, which contains the `build.xml` build file.
@@ -18,7 +20,3 @@
 ### How to clean up (from Terminal):
 
 1. Run `ant clean` to clean the project (i.e., delete all generated files).
-
-
-### Specifying modes:
-

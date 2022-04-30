@@ -13,7 +13,7 @@ import controller.RowGameController;
 public class RowGameGUI implements RowGameView {
     public JFrame gui = new JFrame("Tic Tac Toe");
     // This GUI applies the Composite design pattern.
-    // The GUI is the Composite. The following two 
+    // The GUI is the Composite. The following two
     // Views are the Components.
     public RowBoardGameView boardGameView;
     public RowGameStatusView statusView;
@@ -28,7 +28,7 @@ public class RowGameGUI implements RowGameView {
         gui.setResizable(true);
 
         JPanel gamePanel = new JPanel(new FlowLayout());
-        JPanel game = new JPanel(new GridLayout(3,3));
+        JPanel game = new JPanel(new GridLayout(3, 3));
         gamePanel.add(game, BorderLayout.CENTER);
 
         JPanel options = new JPanel(new FlowLayout());
@@ -48,11 +48,11 @@ public class RowGameGUI implements RowGameView {
             }
         });
 
-	boardGameView = new RowBoardGameView(game, controller);
+        boardGameView = new RowBoardGameView(game, controller);
     }
 
     public void update(RowGameModel gameModel) {
-	boardGameView.update(gameModel);
-	statusView.update(gameModel);
+        boardGameView.update(gameModel);
+        statusView.update(gameModel);
     }
 }

@@ -1,7 +1,7 @@
 package controller;
 
 
-public class BlockIndex 
+public class BlockIndex
 {
     private int row;
 

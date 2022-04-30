@@ -32,7 +32,7 @@ public class RowBoardGameView implements RowGameView {
     }
 
     /**
-     * Updates the block at the given row and column 
+     * Updates the block at the given row and column
      * after one of the player's moves.
      *
      * @param gameModel The RowGameModel containing the block
