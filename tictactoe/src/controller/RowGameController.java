@@ -46,6 +46,7 @@ public class RowGameController {
 	    // Check whether player 1 won
 	    if(blockIndex.matches(0, 0)) {
 		gameModel.blocksData[0][0].setContents("X");
+		gameModel.blocksData[0][0].setIsLegalMove(false);
 		gameModel.player = "2";
 		if(gameModel.movesLeft<7) {
 		    if((gameModel.blocksData[0][0].getContents().equals(gameModel.blocksData[0][1].getContents()) &&
@@ -62,6 +63,7 @@ public class RowGameController {
 		}
 	    } else if(blockIndex.matches(0, 1)) {
 		gameModel.blocksData[0][1].setContents("X");
+		gameModel.blocksData[0][1].setIsLegalMove(false);
 		gameModel.player = "2";
 		if(gameModel.movesLeft<7) {
 		    if((gameModel.blocksData[0][1].getContents().equals(gameModel.blocksData[0][0].getContents()) &&
@@ -76,6 +78,7 @@ public class RowGameController {
 		}
 		} else if(blockIndex.matches(0, 2)) {
 		gameModel.blocksData[0][2].setContents("X");
+		gameModel.blocksData[0][2].setIsLegalMove(false);
 		gameModel.player = "2";
 		if(gameModel.movesLeft<7) {
 		    if((gameModel.blocksData[0][2].getContents().equals(gameModel.blocksData[0][1].getContents()) &&
@@ -92,6 +95,7 @@ public class RowGameController {
 		}
 	    } else if(blockIndex.matches(1, 0)) {
 		gameModel.blocksData[1][0].setContents("X");
+		gameModel.blocksData[1][0].setIsLegalMove(false);
 		gameModel.player = "2";
 		if(gameModel.movesLeft<7) {
 		    if((gameModel.blocksData[1][0].getContents().equals(gameModel.blocksData[1][1].getContents()) &&
@@ -106,6 +110,7 @@ public class RowGameController {
 		}
 	    } else if(blockIndex.matches(1, 1)) {
 		gameModel.blocksData[1][1].setContents("X");
+		gameModel.blocksData[1][1].setIsLegalMove(false);
 		gameModel.player = "2";
 		if(gameModel.movesLeft<7) {
 		    if((gameModel.blocksData[1][1].getContents().equals(gameModel.blocksData[1][0].getContents()) &&
@@ -124,6 +129,7 @@ public class RowGameController {
 		}
 	    } else if(blockIndex.matches(1, 2)) {
 		gameModel.blocksData[1][2].setContents("X");
+		gameModel.blocksData[1][2].setIsLegalMove(false);
 		gameModel.player = "2";
 		if(gameModel.movesLeft<7) {
 		    if((gameModel.blocksData[1][2].getContents().equals(gameModel.blocksData[0][2].getContents()) &&
@@ -138,6 +144,7 @@ public class RowGameController {
 		}
 	    } else if(blockIndex.matches(2, 0)) {
 		gameModel.blocksData[2][0].setContents("X");
+		gameModel.blocksData[2][0].setIsLegalMove(false);
 		gameModel.player = "2";
 		if(gameModel.movesLeft<7) {
 		    if((gameModel.blocksData[2][0].getContents().equals(gameModel.blocksData[2][1].getContents()) &&
@@ -154,6 +161,7 @@ public class RowGameController {
 		}
 	    } else if(blockIndex.matches(2, 1)) {
 		gameModel.blocksData[2][1].setContents("X");
+		gameModel.blocksData[2][1].setIsLegalMove(false);
 		gameModel.player = "2";
 		if(gameModel.movesLeft<7) {
 		    if((gameModel.blocksData[2][1].getContents().equals(gameModel.blocksData[2][0].getContents()) &&
@@ -168,6 +176,7 @@ public class RowGameController {
 		}
 	    } else if(blockIndex.matches(2, 2)) {
 		gameModel.blocksData[2][2].setContents("X");
+		gameModel.blocksData[2][2].setIsLegalMove(false);
 		gameModel.player = "2";
 		if(gameModel.movesLeft<7) {
 		    if((gameModel.blocksData[2][2].getContents().equals(gameModel.blocksData[2][1].getContents()) &&
@@ -187,6 +196,7 @@ public class RowGameController {
 	    // Check whether player 2 won
 	    if(blockIndex.matches(0, 0)) {
 		gameModel.blocksData[0][0].setContents("O");
+		gameModel.blocksData[0][0].setIsLegalMove(false);
 		gameModel.player = "1";
 		if(gameModel.movesLeft<7) {
 		    if((gameModel.blocksData[0][0].getContents().equals(gameModel.blocksData[0][1].getContents()) &&
@@ -203,6 +213,7 @@ public class RowGameController {
 		}
 	    } else if(blockIndex.matches(0, 1)) {
 		gameModel.blocksData[0][1].setContents("O");
+		gameModel.blocksData[0][1].setIsLegalMove(false);
 		gameModel.player = "1";
 		if(gameModel.movesLeft<7) {
 		    if((gameModel.blocksData[0][1].getContents().equals(gameModel.blocksData[0][0].getContents()) &&
@@ -217,6 +228,7 @@ public class RowGameController {
 		}
 	    } else if(blockIndex.matches(0, 2)) {
 		gameModel.blocksData[0][2].setContents("O");
+		gameModel.blocksData[0][2].setIsLegalMove(false);
 		gameModel.player = "1";
 		if(gameModel.movesLeft<7) {
 		    if((gameModel.blocksData[0][2].getContents().equals(gameModel.blocksData[0][1].getContents()) &&
@@ -233,6 +245,7 @@ public class RowGameController {
 		}
 	    } else if(blockIndex.matches(1, 0)) {
 		gameModel.blocksData[1][0].setContents("O");
+		gameModel.blocksData[1][0].setIsLegalMove(false);
 		gameModel.player = "1";
 		if(gameModel.movesLeft<7) {
 		    if((gameModel.blocksData[1][0].getContents().equals(gameModel.blocksData[1][1].getContents()) &&
@@ -247,6 +260,7 @@ public class RowGameController {
 		}
 	    } else if(blockIndex.matches(1, 1)) {
 		gameModel.blocksData[1][1].setContents("O");
+		gameModel.blocksData[1][1].setIsLegalMove(false);
 		gameModel.player = "1";
 		if(gameModel.movesLeft<7) {
 		    if((gameModel.blocksData[1][1].getContents().equals(gameModel.blocksData[1][0].getContents()) &&
@@ -265,6 +279,7 @@ public class RowGameController {
 		}
 	    } else if(blockIndex.matches(1, 2)) {
 		gameModel.blocksData[1][2].setContents("O");
+		gameModel.blocksData[1][2].setIsLegalMove(false);
 		gameModel.player = "1";
 		if(gameModel.movesLeft<7) {
 		    if((gameModel.blocksData[1][2].getContents().equals(gameModel.blocksData[0][2].getContents()) &&
@@ -279,6 +294,7 @@ public class RowGameController {
 		}
 	    } else if(blockIndex.matches(2, 0)) {
 		gameModel.blocksData[2][0].setContents("O");
+		gameModel.blocksData[2][0].setIsLegalMove(false);
 		gameModel.player = "1";
 		if(gameModel.movesLeft<7) {
 		    if((gameModel.blocksData[2][0].getContents().equals(gameModel.blocksData[2][1].getContents()) &&
@@ -295,6 +311,7 @@ public class RowGameController {
 		}
 	    } else if(blockIndex.matches(2, 1)) {
 		gameModel.blocksData[2][1].setContents("O");
+		gameModel.blocksData[2][1].setIsLegalMove(false);
 		gameModel.player = "1";
 		if(gameModel.movesLeft<7) {
 		    if((gameModel.blocksData[2][1].getContents().equals(gameModel.blocksData[2][0].getContents()) &&
@@ -309,6 +326,7 @@ public class RowGameController {
 		}
 	    } else if(blockIndex.matches(2, 2)) {
 		gameModel.blocksData[2][2].setContents("O");
+		gameModel.blocksData[2][2].setIsLegalMove(false);
 		gameModel.player = "1";
 		if(gameModel.movesLeft<7) {
 		    if((gameModel.blocksData[2][2].getContents().equals(gameModel.blocksData[2][1].getContents()) &&
