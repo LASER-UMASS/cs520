@@ -10,7 +10,7 @@ public class RowGameModel
     /**
      * The current player taking their turn
      */
-    public String player = "1";
+    private Player player = Player.PLAYER_1;
     public int movesLeft = 9;
 
     private String finalResult = null;
@@ -26,6 +26,19 @@ public class RowGameModel
 	} // end for row
     }
 
+    public Player getPlayer() {
+	return this.player;
+    }
+
+    public void setPlayer(Player player) {
+	// Perform input validation
+	if (player == null) {
+	    throw new IllegalArgumentException("The player must be non-null.");
+	}
+
+	this.player = player;
+    }
+    
     public String getFinalResult() {
 	return this.finalResult;
     }

@@ -1,5 +1,6 @@
 package view;
 
+import model.Player;
 import model.RowGameModel;
 
 import javax.swing.JPanel;
@@ -29,11 +30,11 @@ public class GameStatusView implements View
     public void update(RowGameModel model) {
 	// Since the game is still in progress, the current player should be shown.
 	if (model.getFinalResult() == null) {
-	    if ("1".equals(model.player)) {
-		this.playerturn.setText("Player 1 to play 'X'");
+	    if (Player.PLAYER_1.equals(model.getPlayer())) {
+		this.playerturn.setText("Player " + Player.PLAYER_1 + " to play 'X'");
 	    }
 	    else {
-		playerturn.setText("Player 2 to play 'O'");
+		playerturn.setText("Player " + Player.PLAYER_2 + " to play 'O'");
 	    }
 	}
 	// Since the game is over (either win or tie), the final result should be shown.
