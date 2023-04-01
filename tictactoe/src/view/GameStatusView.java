@@ -20,6 +20,9 @@ public class GameStatusView implements View
     public GameStatusView(JPanel messages) {
 	super();
 
+	// This is a View but not a Controller
+	this.playerturn.setEditable(false);
+	
 	messages.add(this.playerturn);
     }
 
