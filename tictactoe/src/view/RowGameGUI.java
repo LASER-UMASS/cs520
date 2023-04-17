@@ -41,7 +41,7 @@ public class RowGameGUI implements View {
         JPanel options = new JPanel(new FlowLayout());
         options.add(reset);
 
-        UndoFunctionality undoButtonView = new UndoFunctionality(options);
+        UndoFunctionality undoButtonView = new UndoFunctionality(options, controller);
         addView(undoButtonView);
 
         JPanel messages = new JPanel(new FlowLayout());
@@ -59,6 +59,7 @@ public class RowGameGUI implements View {
                 controller.resetGame();
             }
         });
+
 
 	this.gameBoardView = new GameBoardView(game, controller);
 	addView(this.gameBoardView);

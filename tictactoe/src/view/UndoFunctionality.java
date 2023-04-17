@@ -2,9 +2,12 @@ package view;
 
 import model.Player;
 import model.RowGameModel;
+import controller.RowGameController;
 
 import javax.swing.JPanel;
-import javax.swing.JTextArea;
+import java.awt.*;
+import java.awt.event.*;
+import javax.swing.JButton;
 
 
 /**
@@ -17,15 +20,16 @@ public class UndoFunctionality implements View
 {
     public JButton undo = new JButton("Undo");
 
-    public UndoFunctionality(JPanel options) {
+    public UndoFunctionality(JPanel options, RowGameController controller) {
 	super();
 
 	options.add(undo);
+
     undo.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                controller.undoMoves();
-            }
-        });
+    public void actionPerformed(ActionEvent e) {
+        controller.undoGame();
+        }
+    });
     }
 
     public void update(RowGameModel model) {

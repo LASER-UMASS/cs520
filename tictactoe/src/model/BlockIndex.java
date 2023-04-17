@@ -1,10 +1,10 @@
-package view;
+package model;
 
 
 public class BlockIndex
 {
-    private final int row;
-    private final int column;
+    private int row;
+    private int column;
 
     public BlockIndex(int row, int column)
     {

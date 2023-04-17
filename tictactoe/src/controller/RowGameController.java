@@ -392,10 +392,10 @@ public class RowGameController {
 	// The Controller first manipulates the Model.
 		int lastMovedBlockRow = gameModel.lastMovedBlock.getRow();
 		int lastMovedBlockColumn = gameModel.lastMovedBlock.getColumn();
-		gameModel.blocksData[lastMovedBlockRow][lastMovedBlockColumn].reset()
+		gameModel.blocksData[lastMovedBlockRow][lastMovedBlockColumn].reset();
 		gameModel.blocksData[lastMovedBlockRow][lastMovedBlockColumn].setIsLegalMove(true);
 		gameModel.lastMovedBlock.updateIndex(-1,-1);
-		
+
 		if(gameModel.getPlayer().equals(Player.PLAYER_2)) {
 			gameModel.setPlayer(Player.PLAYER_1);
 		} else {
