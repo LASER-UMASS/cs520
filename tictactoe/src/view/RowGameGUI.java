@@ -20,6 +20,7 @@ public class RowGameGUI implements View {
     public JFrame gui = new JFrame("Tic Tac Toe");
     public RowGameModel gameModel = new RowGameModel();
     private GameBoardView gameBoardView;
+    public UndoFunctionality undoButtonView;
     /** For the Composite design pattern, the RowGameGUI is the Composite */
     private List<View> viewList = new ArrayList<View>();
     public JButton reset = new JButton("Reset");
@@ -39,6 +40,10 @@ public class RowGameGUI implements View {
 
         JPanel options = new JPanel(new FlowLayout());
         options.add(reset);
+
+        UndoFunctionality undoButtonView = new UndoFunctionality(options);
+        addView(undoButtonView);
+
         JPanel messages = new JPanel(new FlowLayout());
         messages.setBackground(Color.white);
 
@@ -52,6 +57,12 @@ public class RowGameGUI implements View {
         reset.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 controller.resetGame();
+            }
+        });
+
+        undo.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                controller.undoMoves();
             }
         });
 
