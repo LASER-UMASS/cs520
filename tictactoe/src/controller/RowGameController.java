@@ -401,7 +401,7 @@ public class RowGameController {
 		} else {
 			gameModel.setPlayer(Player.PLAYER_2);
 		}
-        gameModel.movesLeft--;
+        gameModel.movesLeft++;
 
 	// The Controller then updates the View.
 	gameView.update(gameModel);
