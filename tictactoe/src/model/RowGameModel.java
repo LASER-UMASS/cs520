@@ -6,7 +6,7 @@ public class RowGameModel
     public static final String GAME_END_NOWINNER = "Game ends in a draw";
 
     public RowBlockModel[][] blocksData = new RowBlockModel[3][3];
-
+    public BlockIndex lastMovedBlock = new BlockIndex(-1,-1); //setting to invalid block as last moved block in the beginning would be nothing
     /**
      * The current player taking their turn
      */

@@ -30,6 +30,7 @@ public class RowGameController {
             }
         }
 
+	gameModel.lastMovedBlock = {-1,-1}; //indicating that there is no last move 
 	gameView.update(gameModel);
     }
 
@@ -366,6 +367,25 @@ public class RowGameController {
 
     /**
      * Resets the game to be able to start playing again.
+     */
+    public void resetGame() {
+	// The Controller first manipulates the Model.
+        for(int row = 0;row<3;row++) {
+            for(int column = 0;column<3;column++) {
+                gameModel.blocksData[row][column].reset();
+		gameModel.blocksData[row][column].setIsLegalMove(true);
+            }
+        }
+        gameModel.setPlayer(Player.PLAYER_1);
+        gameModel.movesLeft = 9;
+	gameModel.setFinalResult(null);
+
+	// The Controller then updates the View.
+	gameView.update(gameModel);
+    }
+
+	/**
+     * Undoes previous move(s).
      */
     public void resetGame() {
 	// The Controller first manipulates the Model.
