@@ -26,4 +26,9 @@ public class BlockIndex
     {
 	return ((this.getRow() == row) && (this.getColumn() == column));
     }
+
+    public void updateIndex(int row, int column) {
+        this.row = row;
+        this.column = column;
+    }
 }
