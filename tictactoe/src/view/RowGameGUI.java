@@ -60,12 +60,6 @@ public class RowGameGUI implements View {
             }
         });
 
-        undo.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                controller.undoMoves();
-            }
-        });
-
 	this.gameBoardView = new GameBoardView(game, controller);
 	addView(this.gameBoardView);
     }

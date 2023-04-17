@@ -17,15 +17,23 @@ public class UndoFunctionality implements View
 {
     public JButton undo = new JButton("Undo");
 
-    
     public UndoFunctionality(JPanel options) {
 	super();
 
 	options.add(undo);
+    undo.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                controller.undoMoves();
+            }
+        });
     }
 
     public void update(RowGameModel model) {
     //Undo should be enabled only when there are moves left to play
-    
+        if(model.lastMovedBlock.matches(-1,-1)) {
+            this.undo.setEnabled(false);
+        } else {
+            this.undo.setEnabled(true);
+        }
     }
 }
