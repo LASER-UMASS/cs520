@@ -29,7 +29,9 @@ public class RowGameController {
 		gameModel.blocksData[row][column].setIsLegalMove(true);
             }
         }
-	gameModel.lastMovedBlock.updateIndex(-1,-1);
+	gameModel.lastMovedBlock[0] = -1;
+	gameModel.lastMovedBlock[1] = -1;
+
 	gameView.update(gameModel);
     }
 
@@ -43,7 +45,9 @@ public class RowGameController {
 	gameModel.movesLeft--;
 
 	BlockIndex blockIndex = gameView.getBlockIndex(block);
-	gameModel.lastMovedBlock.updateIndex(blockIndex.getRow(),blockIndex.getColumn());
+	
+	gameModel.lastMovedBlock[0] = blockIndex.getRow();
+	gameModel.lastMovedBlock[1] = blockIndex.getColumn();
 	
 	if(gameModel.getPlayer().equals(Player.PLAYER_1)) {
 	    // Check whether player 1 won
@@ -390,11 +394,13 @@ public class RowGameController {
      */
     public void undoGame() {
 	// The Controller first manipulates the Model.
-		int lastMovedBlockRow = gameModel.lastMovedBlock.getRow();
-		int lastMovedBlockColumn = gameModel.lastMovedBlock.getColumn();
+		int lastMovedBlockRow = gameModel.lastMovedBlock[0];
+		int lastMovedBlockColumn = gameModel.lastMovedBlock[1];
 		gameModel.blocksData[lastMovedBlockRow][lastMovedBlockColumn].reset();
 		gameModel.blocksData[lastMovedBlockRow][lastMovedBlockColumn].setIsLegalMove(true);
-		gameModel.lastMovedBlock.updateIndex(-1,-1);
+		
+		gameModel.lastMovedBlock[0] = -1;
+		gameModel.lastMovedBlock[1] = -1;
 
 		if(gameModel.getPlayer().equals(Player.PLAYER_2)) {
 			gameModel.setPlayer(Player.PLAYER_1);
