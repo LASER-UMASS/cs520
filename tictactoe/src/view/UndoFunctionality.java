@@ -1,11 +1,9 @@
 package view;
 
-import model.Player;
 import model.RowGameModel;
 import controller.RowGameController;
 
 import javax.swing.JPanel;
-import java.awt.*;
 import java.awt.event.*;
 import javax.swing.JButton;
 
@@ -34,7 +32,7 @@ public class UndoFunctionality implements View
 
     public void update(RowGameModel model) {
     //Undo should be enabled only when there are moves left to play
-        if(model.lastMovedBlock.matches(-1,-1) || model.getFinalResult()!=null) {
+        if(model.isThereMoveToUndo() || model.getFinalResult()!=null) {
             this.undo.setEnabled(false);
         } else {
             this.undo.setEnabled(true);
