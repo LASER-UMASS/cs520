@@ -48,8 +48,8 @@ public class RowGameModel
 
     public boolean isThereMoveToUndo() {
         if(this.lastMovedBlock[0] == -1 && this.lastMovedBlock[1] == -1) {
-            return true;
+            return false;
         }
-        return false;
+        return true;
     }
 }
