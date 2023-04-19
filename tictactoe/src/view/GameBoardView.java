@@ -59,6 +59,10 @@ public class GameBoardView implements View
 	// Not found
 	return null;
     }
+
+    public JButton getBlockFromIndex(int x, int y) {
+        return this.blocks[x][y];
+    }
     
     /**
      * Updates the block at the given row and column 
