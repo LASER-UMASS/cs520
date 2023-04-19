@@ -9,6 +9,7 @@ import javax.swing.JPanel;
 
 import model.Player;
 import model.RowBlockModel;
+import view.RowGameGUI;
 import view.BlockIndex;
 import controller.RowGameController;
 
@@ -39,10 +40,50 @@ public class TestExample {
 	RowBlockModel block = new RowBlockModel(null);
     }
 
+
+    private void checkInitialCondition()
+    {
+        for (int row = 0; row < 3; row++) {
+            for (int column = 0; column < 3; column++) {
+                assertEquals("", game.gameModel.blocksData[row][column].getContents());
+                assertEquals(true, game.gameModel.blocksData[row][column].getIsLegalMove());
+                //assertTrue("all buttons are enabled initially", game.gameView.gameBoardView().isBlockEnabled(new BlockIndex(row, column)));
+            }
+        }
+    }
+
+    //NEED TO RE-EXECUTE
+    @Test
+    public void testCase5() {
+
+        //pre-conditions 
+        assertEquals (9, game.gameModel.movesLeft);
+        assertEquals (Player.PLAYER_1, game.gameModel.getPlayer());
+        assertEquals (true, game.gameModel.isThereMoveToUndo());
+        checkInitialCondition();
+        assertNull("final result is null at the beginning of the game", game.gameModel.getFinalResult() );
+
+        //method under test
+        game.move((JButton) ((JPanel)((JPanel)game.gameView.gui.getContentPane().getComponent(0)).getComponent(0)).getComponent(0));
+        game.move((JButton) ((JPanel)((JPanel)game.gameView.gui.getContentPane().getComponent(0)).getComponent(0)).getComponent(1));
+        game.move((JButton) ((JPanel)((JPanel)game.gameView.gui.getContentPane().getComponent(0)).getComponent(0)).getComponent(2));
+        game.move((JButton) ((JPanel)((JPanel)game.gameView.gui.getContentPane().getComponent(0)).getComponent(0)).getComponent(3));
+        
+        game.resetGame();
+
+        //post-condition
+        assertEquals (9, game.gameModel.movesLeft);
+        assertEquals (Player.PLAYER_1, game.gameModel.getPlayer());
+        assertEquals (true, game.gameModel.isThereMoveToUndo());
+        checkInitialCondition();
+        assertNull("final result is null atfter game is reset", game.gameModel.getFinalResult() );
+
+    }
+
     @Test
     public void testCase6() {
 
-        //pre-condition
+        //pre-conditions 
         assertEquals (9, game.gameModel.movesLeft);
 
         //post-condition
