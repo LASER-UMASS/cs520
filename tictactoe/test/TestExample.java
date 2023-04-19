@@ -33,4 +33,10 @@ public class TestExample {
     public void testNewBlockViolatesPrecondition() {
 	RowBlockModel block = new RowBlockModel(null);
     }
+
+    @Test
+    public void testCase6() {
+        assertEquals (Player.PLAYER_1, game.gameModel.getPlayer());
+        assertEquals (9, game.gameModel.movesLeft);
+    }
 }
