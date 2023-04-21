@@ -33,51 +33,52 @@ public class TestExample {
         RowBlockModel block = new RowBlockModel(null);
     }
 
+    // @Test
+    // public void testIllegalMove() {
+    // // Make an illegal move (selecting an already occupied block)
+    // // a legal move
+    // game.move(game.gameView.gameBoardView.blocks[0][0]);
+    // assertEquals(Player.PLAYER_2, game.gameModel.getPlayer());
+    // assertEquals(8, game.gameModel.movesLeft);
+    // // an illegal move (selecting an already occupied block)
+    // game.move(game.gameView.gameBoardView.blocks[0][0]);
+    // assertEquals(Player.PLAYER_1, game.gameModel.getPlayer());
+    // assertEquals(7, game.gameModel.movesLeft);
+    // }
+
     @Test
-    public void testIllegalMove() {
-        // Make an illegal move (selecting an already occupied block)
-        // a legal move
+    public void testLegalMoveUpdatesGame() {
+
+        // Move to a valid block
         game.move(game.gameView.gameBoardView.blocks[0][0]);
+
+        // The current player should have changed
         assertEquals(Player.PLAYER_2, game.gameModel.getPlayer());
+
+        // The blocks data should have been updated
+        assertEquals("X", game.gameModel.blocksData[0][0].getContents());
+
+        // The number of moves left should have decreased by 1
         assertEquals(8, game.gameModel.movesLeft);
-        // an illegal move (selecting an already occupied block)
-        game.move(game.gameView.gameBoardView.blocks[0][0]);
-        assertEquals(Player.PLAYER_1, game.gameModel.getPlayer());
-        assertEquals(7, game.gameModel.movesLeft);
     }
 
     // @Test
-    // public void testLegalMoveUpdatesGame() {
-
-    // game.move(event);
-    // // Move to a valid block
-    // game.move(game.gameView.blocks[0][0]);
-
-    // // The current player should have changed
-    // assertEquals(Player.PLAYER_2, game.gameModel.getPlayer());
-
-    // // The blocks data should have been updated
-    // assertEquals("X", game.gameModel.blocksData[0][0].getContents());
-
-    // // The number of moves left should have decreased by 1
-    // assertEquals(8, game.gameModel.movesLeft);
-    // }
-    // @Test
     // public void testWinningMove() {
     // // Simulate a winning move for player 1
-    // game.gameView.[0][0].setText("X");
-    // game.gameView.blockButton[1][1].setText("O");
-    // game.gameView.blockButton[0][1].setText("X");
-    // game.gameView.blockButton[1][0].setText("O");
-    // game.gameView.blockButton[0][2].setText("X");
+    // game.move(game.gameView.gameBoardView.blocks[0][0]);
+    // game.move(game.gameView.gameBoardView.blocks[1][1]);
+    // game.move(game.gameView.gameBoardView.blocks[0][1]);
+    // game.move(game.gameView.gameBoardView.blocks[1][0]);
+    // game.move(game.gameView.gameBoardView.blocks[0][2]);
 
     // // Perform a final move to complete the game
-    // game.move(game.gameView.blockButton[1][2]);
+    // game.move(game.gameView.gameBoardView.blocks[1][2]);
 
     // // Check if the game is won by player 1
     // assertEquals(Player.PLAYER_1, game.gameModel.getFinalResult());
     // assertEquals(false, game.gameModel.blocksData[1][2].getIsLegalMove());
     // }
+
     // @Test
     // public void testTieGame() {
     // game.move(0, 0);
