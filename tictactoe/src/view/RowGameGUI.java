@@ -19,7 +19,7 @@ import controller.RowGameController;
 public class RowGameGUI implements View {
     public JFrame gui = new JFrame("Tic Tac Toe");
     public RowGameModel gameModel = new RowGameModel();
-    private GameBoardView gameBoardView;
+    public GameBoardView gameBoardView;
     /** For the Composite design pattern, the RowGameGUI is the Composite */
     private List<View> viewList = new ArrayList<View>();
     public JButton reset = new JButton("Reset");

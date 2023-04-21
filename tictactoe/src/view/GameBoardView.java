@@ -16,7 +16,7 @@ import javax.swing.JPanel;
  * View).
  */
 public class GameBoardView implements View {
-    private JButton[][] blocks = new JButton[3][3];
+    public JButton[][] blocks = new JButton[3][3];
 
     public GameBoardView(JPanel game, RowGameController controller) {
         super();
