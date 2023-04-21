@@ -105,35 +105,28 @@ public class TestExample {
     // assertNull(game.gameModel.getFinalResult());
     // }
 
-    @Test
-    public void testUndoNotAllowedBeforeMove() {
-        // Undo should not be allowed if no moves have been made
-        game.undoMove();
-    }
-
     // @Test
-    // public void testUndoMove() {
-    // JButton button = new JButton();
-
-    // // Make a move
-    // game.move(null);
-    // ;
-    // Player currentPlayer = game.gameModel.getPlayer();
-    // int movesLeft = game.gameModel.movesLeft;
-
-    // // Verify the move was made successfully
-    // assertEquals(Player.PLAYER_2, currentPlayer);
-    // assertEquals(8, movesLeft);
-
-    // // Undo the move
+    // public void testUndoNotAllowedBeforeMove() {
+    // // Undo should not be allowed if no moves have been made
     // game.undoMove();
-
-    // // Verify the game is updated appropriately
-    // currentPlayer = game.gameModel.getPlayer();
-    // movesLeft = game.gameModel.movesLeft;
-
-    // assertEquals(Player.PLAYER_1, currentPlayer);
-    // assertEquals(9, movesLeft);
     // }
+
+    @Test
+    public void testUndoMove() {
+
+        // Make a move
+        game.move(game.gameView.gameBoardView.blocks[0][0]);
+
+        // Verify the move was made successfully
+        assertEquals(Player.PLAYER_2, game.gameModel.getPlayer());
+        assertEquals(8, game.gameModel.movesLeft);
+
+        // Undo the move
+        game.undoMove();
+
+        // Verify the game is updated appropriately
+        assertEquals(Player.PLAYER_1, game.gameModel.getPlayer());
+        assertEquals(9, game.gameModel.movesLeft);
+    }
 
 }
