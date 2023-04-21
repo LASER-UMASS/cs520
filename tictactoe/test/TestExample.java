@@ -62,37 +62,39 @@ public class TestExample {
     // assertEquals(8, game.gameModel.movesLeft);
     // }
 
-    @Test
-    public void testWinningMove() {
-        // Player 1 makes the winning move
-        game.move(game.gameView.gameBoardView.blocks[0][0]);
-        game.move(game.gameView.gameBoardView.blocks[0][1]);
-        game.move(game.gameView.gameBoardView.blocks[1][0]);
-        game.move(game.gameView.gameBoardView.blocks[0][2]);
-        game.move(game.gameView.gameBoardView.blocks[2][0]);
-
-        assertEquals("Player 1 wins!", game.gameModel.getFinalResult());
-        // assertEquals(Player.PLAYER_2, game.gameModel.getPlayer());
-        //// The game should be over
-        assertEquals(false, game.gameModel.blocksData[0][2].getIsLegalMove());
-    }
-
     // @Test
-    // public void testTieGame() {
-    // // Make a series of moves that results in a tie game
-    // game.move(game.gameView.gameBoardView.blocks[0][0]); // Player 1
-    // game.move(game.gameView.gameBoardView.blocks[0][1]); // Player 2
-    // game.move(game.gameView.gameBoardView.blocks[0][2]); // Player 1
-    // game.move(game.gameView.gameBoardView.blocks[1][0]); // Player 2
-    // game.move(game.gameView.gameBoardView.blocks[1][1]); // Player 1
-    // game.move(game.gameView.gameBoardView.blocks[2][1]); // Player 2
-    // game.move(game.gameView.gameBoardView.blocks[1][2]); // Player 1
-    // game.move(game.gameView.gameBoardView.blocks[2][0]); // Player 2
-    // game.move(game.gameView.gameBoardView.blocks[2][2]); // Player 1
-    // System.out.printf("%s", game.gameModel.getFinalResult());
-    // // assertTrue(game.isGameOver());
-    // // assertNull(game.getWinner());
+    // public void testWinningMove() {
+    // // Player 1 makes the winning move
+    // game.move(game.gameView.gameBoardView.blocks[0][0]);
+    // game.move(game.gameView.gameBoardView.blocks[0][1]);
+    // game.move(game.gameView.gameBoardView.blocks[1][0]);
+    // game.move(game.gameView.gameBoardView.blocks[0][2]);
+    // game.move(game.gameView.gameBoardView.blocks[2][0]);
+
+    // assertEquals("Player 1 wins!", game.gameModel.getFinalResult());
+    // // assertEquals(Player.PLAYER_2, game.gameModel.getPlayer());
+    // // The game should be over
+    // assertEquals(false, game.gameModel.blocksData[0][2].getIsLegalMove());
     // }
+
+    @Test
+    public void testTieGame() {
+        // Make a series of moves that results in a tie game
+        game.move(game.gameView.gameBoardView.blocks[0][0]); // Player 1
+        game.move(game.gameView.gameBoardView.blocks[0][1]); // Player 2
+        game.move(game.gameView.gameBoardView.blocks[0][2]); // Player 1
+        game.move(game.gameView.gameBoardView.blocks[2][2]); // Player 2
+        game.move(game.gameView.gameBoardView.blocks[2][1]); // Player 1
+        game.move(game.gameView.gameBoardView.blocks[2][0]); // Player 2
+        game.move(game.gameView.gameBoardView.blocks[1][0]); // Player 1
+        game.move(game.gameView.gameBoardView.blocks[1][1]); // Player 2
+        game.move(game.gameView.gameBoardView.blocks[1][2]); // Player 1
+        // System.out.printf("%s", game.gameModel.getFinalResult());
+
+        assertEquals("Game ends in a draw", game.gameModel.getFinalResult());
+        // assertTrue(game.isGameOver());
+        // assertNull(game.getWinner());
+    }
 
     // @Test
     // public void testResetGame() {
