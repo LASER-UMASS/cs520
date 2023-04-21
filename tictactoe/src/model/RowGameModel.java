@@ -13,7 +13,7 @@ public class RowGameModel {
     private Player player = Player.PLAYER_1;
     public int movesLeft = 9;
 
-    private String finalResult = null;
+    public String finalResult = null;
 
     private Stack<Move> moveHistory = new Stack<>(); // Stack to store move history
 
