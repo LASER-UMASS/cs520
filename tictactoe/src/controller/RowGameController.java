@@ -48,7 +48,10 @@ public class RowGameController {
 
 	//////////////
 	public void undoMove() {
-		if (gameModel.movesLeft < 9) {
+		if (gameModel.movesLeft == 9) {
+
+			throw new IllegalStateException("Cannot undo before making a move");
+		} else if (gameModel.movesLeft < 9) {
 			gameModel.undoMove(); // call the undoMove() method of the model
 			gameView.update(gameModel); // update the view with the new model state
 		}
