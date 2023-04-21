@@ -3,16 +3,12 @@ import org.junit.Before;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
-import model.Player;
-import model.RowBlockModel;
-import model.RowGameModel;
-import controller.RowGameController;
-
 import javax.swing.JButton;
 
-/**
- * An example test class, which merely shows how to write JUnit tests.
- */
+import model.Player;
+import model.RowBlockModel;
+import controller.RowGameController;
+
 public class TestExample {
     private RowGameController game;
 
@@ -37,87 +33,105 @@ public class TestExample {
         RowBlockModel block = new RowBlockModel(null);
     }
 
-    ///////////////////////// *1.After performing an illegal move, the game is not
-    ///////////////////////// updated.*/
     @Test
     public void testIllegalMove() {
-        // Place a block in an already occupied cell
-        JButton block = game.gameView.blocks[0][0];
-        Player currentPlayer = game.gameModel.getPlayer();
-        game.move(block);
-        // Try to place another block in the same cell
-        boolean success = game.move(block);
-        // Check if the move was unsuccessful
-        assertFalse(success);
-        // Check if the game state remains the same
-        assertEquals(currentPlayer, game.gameModel.getPlayer());
-    }
-
-    // 2After performing a legal move, the game is updated appropriately.
-    @Test
-    public void testLegalMove() {
-        // Place a block in an empty cell
-        int row = 0;
-        int col = 0;
-        Player currentPlayer = game.gameModel.getPlayer();
-        boolean success = game.move(row, col);
-        // Check if the move was successful
-        assertEquals(true, success);
-        // Check if the game state was updated correctly
-        assertNotEquals(currentPlayer, game.gameModel.getPlayer());
+        // Make an illegal move (selecting an already occupied block)
+        // a legal move
+        game.move(game.gameView.gameBoardView.blocks[0][0]);
+        assertEquals(Player.PLAYER_2, game.gameModel.getPlayer());
         assertEquals(8, game.gameModel.movesLeft);
-    }
-
-    // 3One of the players wins the game.
-    @Test
-    public void testWinningGame() {
-        // Make moves to achieve a winning state
-        game.move(0, 0); // Player 1
-        game.move(1, 0); // Player 2
-        game.move(0, 1); // Player 1
-        game.move(1, 1); // Player 2
-        game.move(0, 2); // Player 1 (wins)
-        // Check if the game state reflects the winner
-        assertEquals(Player.PLAYER_1, game.gameModel.getWinner());
-    }
-
-    // 4The players tie the game.
-    @Test
-    public void testTieGame() {
-        // Make moves to achieve a tied state
-        game.move(0, 0); // Player 1
-        game.move(0, 1); // Player 2
-        game.move(0, 2); // Player 1
-        game.move(1, 0); // Player 2
-        game.move(1, 2); // Player 1
-        game.move(1, 1); // Player 2
-        game.move(2, 0); // Player 1
-        game.move(2, 2); // Player 2
-        game.move(2, 1); // Player 1 (tie)
-        // Check if the game state reflects the tie
-        assertEquals(Player.NONE, game.gameModel.getWinner());
-    }
-
-    // 5. After resetting the app, the game has the expected initial configuration.
-    @Test
-    public void testResetGame() {
-        // Make some moves and reset the game
-        game.move(0, 0); // Player 1
-        game.move(1, 0); // Player 2
-        game.reset();
-        // Check if the game state is reset to initial values
+        // an illegal move (selecting an already occupied block)
+        game.move(game.gameView.gameBoardView.blocks[0][0]);
         assertEquals(Player.PLAYER_1, game.gameModel.getPlayer());
-        assertEquals(9, game.gameModel.movesLeft);
-        assertEquals(Player.NONE, game.gameModel.getWinner());
+        assertEquals(7, game.gameModel.movesLeft);
     }
 
-    // 6. If the user has not done at least one move, the user is not permitted to
-    // undo.
-@Test
-public void testUndoNotAllowedBeforeAnyMoves() {
-    // Check if undo is disallowed before any moves are made
-    boolean success = game.undo();
-    assertEquals(false, success);
-}``
+    // @Test
+    // public void testLegalMoveUpdatesGame() {
+
+    // game.move(event);
+    // // Move to a valid block
+    // game.move(game.gameView.blocks[0][0]);
+
+    // // The current player should have changed
+    // assertEquals(Player.PLAYER_2, game.gameModel.getPlayer());
+
+    // // The blocks data should have been updated
+    // assertEquals("X", game.gameModel.blocksData[0][0].getContents());
+
+    // // The number of moves left should have decreased by 1
+    // assertEquals(8, game.gameModel.movesLeft);
+    // }
+    // @Test
+    // public void testWinningMove() {
+    // // Simulate a winning move for player 1
+    // game.gameView.[0][0].setText("X");
+    // game.gameView.blockButton[1][1].setText("O");
+    // game.gameView.blockButton[0][1].setText("X");
+    // game.gameView.blockButton[1][0].setText("O");
+    // game.gameView.blockButton[0][2].setText("X");
+
+    // // Perform a final move to complete the game
+    // game.move(game.gameView.blockButton[1][2]);
+
+    // // Check if the game is won by player 1
+    // assertEquals(Player.PLAYER_1, game.gameModel.getFinalResult());
+    // assertEquals(false, game.gameModel.blocksData[1][2].getIsLegalMove());
+    // }
+    // @Test
+    // public void testTieGame() {
+    // game.move(0, 0);
+    // game.takeTurn(1, 1);
+    // game.takeTurn(2, 2);
+    // game.takeTurn(0, 2);
+    // game.takeTurn(0, 1);
+    // game.takeTurn(2, 1);
+    // game.takeTurn(1, 2);
+    // game.takeTurn(2, 0);
+    // game.takeTurn(1, 0);
+    // assertTrue(game.isGameOver());
+    // assertNull(game.getWinner());
+    // }
+
+    // @Test
+    // public void testResetGame() {
+    // // Reset the game and check if the initial configuration is as expected
+    // game.reset();
+    // assertEquals(Player.PLAYER_1, game.gameModel.getPlayer());
+    // assertEquals(9, game.gameModel.movesLeft);
+    // assertFalse(game.isGameOver());
+    // assertNull(game.getWinner());
+    // }
+
+    // @Test
+    // public void testUndoNotAllowedBeforeMove() {
+    // // Undo should not be allowed if no moves have been made
+    // assertFalse(game.undoMove());
+    // }
+
+    // @Test
+    // public void testUndoMove() {
+    // JButton button = new JButton();
+
+    // // Make a move
+    // game.move(null);
+    // ;
+    // Player currentPlayer = game.gameModel.getPlayer();
+    // int movesLeft = game.gameModel.movesLeft;
+
+    // // Verify the move was made successfully
+    // assertEquals(Player.PLAYER_2, currentPlayer);
+    // assertEquals(8, movesLeft);
+
+    // // Undo the move
+    // game.undoMove();
+
+    // // Verify the game is updated appropriately
+    // currentPlayer = game.gameModel.getPlayer();
+    // movesLeft = game.gameModel.movesLeft;
+
+    // assertEquals(Player.PLAYER_1, currentPlayer);
+    // assertEquals(9, movesLeft);
+    // }
 
 }

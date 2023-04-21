@@ -14,7 +14,10 @@
 
 1. After building the project (i.e., running `ant`), run the following command in the tictactoe folder:
    `java -cp bin RowGameApp`
-
+2.To undo a move, press the "Undo" button on the game board. This will undo the last move made by the player. The game board will be updated 
+   to show the previous state of the game.
 ### How to clean up (from Terminal):
 
 1. Run `ant clean` to clean the project (i.e., delete all generated files).
+
+Note: The undo feature is only available for the player's moves and not for the computer's moves.
