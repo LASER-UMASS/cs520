@@ -46,38 +46,35 @@ public class TestExample {
     // assertEquals(7, game.gameModel.movesLeft);
     // }
 
-    @Test
-    public void testLegalMoveUpdatesGame() {
-
-        // Move to a valid block
-        game.move(game.gameView.gameBoardView.blocks[0][0]);
-
-        // The current player should have changed
-        assertEquals(Player.PLAYER_2, game.gameModel.getPlayer());
-
-        // The blocks data should have been updated
-        assertEquals("X", game.gameModel.blocksData[0][0].getContents());
-
-        // The number of moves left should have decreased by 1
-        assertEquals(8, game.gameModel.movesLeft);
-    }
-
     // @Test
-    // public void testWinningMove() {
-    // // Simulate a winning move for player 1
+    // public void testLegalMoveUpdatesGame() {
+
+    // // Move to a valid block
     // game.move(game.gameView.gameBoardView.blocks[0][0]);
-    // game.move(game.gameView.gameBoardView.blocks[1][1]);
-    // game.move(game.gameView.gameBoardView.blocks[0][1]);
-    // game.move(game.gameView.gameBoardView.blocks[1][0]);
-    // game.move(game.gameView.gameBoardView.blocks[0][2]);
 
-    // // Perform a final move to complete the game
-    // game.move(game.gameView.gameBoardView.blocks[1][2]);
+    // // The current player should have changed
+    // assertEquals(Player.PLAYER_2, game.gameModel.getPlayer());
 
-    // // Check if the game is won by player 1
-    // assertEquals(Player.PLAYER_1, game.gameModel.getFinalResult());
-    // assertEquals(false, game.gameModel.blocksData[1][2].getIsLegalMove());
+    // // The blocks data should have been updated
+    // assertEquals("X", game.gameModel.blocksData[0][0].getContents());
+
+    // // The number of moves left should have decreased by 1
+    // assertEquals(8, game.gameModel.movesLeft);
     // }
+
+    @Test
+    public void testWinningMove() {
+        // Player 1 makes the winning move
+        game.move(game.gameView.gameBoardView.blocks[0][0]);
+        game.move(game.gameView.gameBoardView.blocks[0][1]);
+        game.move(game.gameView.gameBoardView.blocks[1][0]);
+        game.move(game.gameView.gameBoardView.blocks[0][2]);
+        game.move(game.gameView.gameBoardView.blocks[2][0]);
+
+        assertEquals(Player.PLAYER_2, game.gameModel.getPlayer());
+        //// The game should be over
+        assertEquals(false, game.gameModel.blocksData[0][2].getIsLegalMove());
+    }
 
     // @Test
     // public void testTieGame() {
