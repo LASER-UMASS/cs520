@@ -142,4 +142,28 @@ public class TestExample {
 	// Check the post-conditions
 	this.checkInitialConfiguration();
     }
+
+    @Test(expected=UnsupportedOperationException.class)
+    public void testUndoDisallowed() {
+	// Perform the setup and check the pre-conditions
+	this.checkInitialConfiguration();
+
+	// Call the unit under test: Execute undo
+	game.undo();
+
+	// Check the post-conditions. See the @Test annotation.
+    }
+    
+    @Test
+    public void testUndoAallowed() {
+	// Perform the setup and check the pre-conditions
+	BlockIndex blockIndex = new BlockIndex(0, 0);
+	testLegalMoveHelper(blockIndex);
+	
+	// Call the unit under test: Execute undo
+	game.undo();
+
+	// Check the post-conditions
+	this.checkInitialConfiguration();
+    }
 }

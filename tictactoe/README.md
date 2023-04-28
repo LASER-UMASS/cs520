@@ -18,3 +18,7 @@
 ### How to clean up (from Terminal):
 
 1. Run `ant clean` to clean the project (i.e., delete all generated files).
+
+Supported features:
+
+* Undo functionality - If the game has not just started or finished, the users are allowed to undo their previous moves. The user should click on the Undo button to undo the immediately previous move.

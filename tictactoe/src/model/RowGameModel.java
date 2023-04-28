@@ -1,5 +1,7 @@
 package model;
 
+import java.util.Stack;
+
 
 public class RowGameModel 
 {
@@ -15,7 +17,10 @@ public class RowGameModel
 
     private String finalResult = null;
 
-
+    /** Supports undo functionality */
+    private Stack<BlockIndex> historyOfMoves = new Stack<BlockIndex>();
+    
+    
     public RowGameModel() {
 	super();
 
@@ -45,5 +50,32 @@ public class RowGameModel
 
     public void setFinalResult(String finalResult) {
 	this.finalResult = finalResult;
+    }
+
+    public void addToHistoryOfMoves(BlockIndex move) {
+	this.historyOfMoves.push(move);
+    }
+
+    public void clearHistoryOfMoves() {
+	this.historyOfMoves.clear();
+    }
+
+    public void undo() {
+	// Check pre-conditions
+	if (this.historyOfMoves.isEmpty()) {
+	    throw new UnsupportedOperationException("Undo is not currently allowed.");
+	}
+
+	// "Erase" the last move.
+	BlockIndex lastMove = this.historyOfMoves.pop();
+	this.blocksData[lastMove.getRow()][lastMove.getColumn()].setContents("");
+	this.blocksData[lastMove.getRow()][lastMove.getColumn()].setIsLegalMove(true);
+	if (this.player == Player.PLAYER_1) {
+	    this.player = Player.PLAYER_2;
+	}
+	else {
+	    this.player = Player.PLAYER_1;
+	}
+	this.movesLeft++;
     }
 }

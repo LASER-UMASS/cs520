@@ -349,9 +349,30 @@ public class RowGameController {
 	    }
 	}
 
+	// Supports undo functionality
+	gameModel.addToHistoryOfMoves(blockIndex);
+
 	// The Controller then updates the View.
 	gameView.update(gameModel);
     }
+
+    /**
+     * Performs undo for the last move taken if the game is not
+     * in its initial configuration or has been finished.
+     */
+    public void undo() {
+	// Check the pre-conditions: It cannot be either the start or end of the game.
+	if ((gameModel.movesLeft == 9) ||
+	    (gameModel.getFinalResult() != null)) {
+	    throw new UnsupportedOperationException("Undo is currently disallowed.");
+	}
+
+	// Manipulate the model
+	gameModel.undo();
+
+	// Update the view
+	gameView.update(gameModel);
+    }    
 
     /**
      * Ends the game disallowing further player turns.
@@ -382,6 +403,9 @@ public class RowGameController {
         gameModel.setPlayer(Player.PLAYER_1);
         gameModel.movesLeft = 9;
 	gameModel.setFinalResult(null);
+
+	// Supports undo functionality
+	gameModel.clearHistoryOfMoves();
 
 	// The Controller then updates the View.
 	gameView.update(gameModel);
