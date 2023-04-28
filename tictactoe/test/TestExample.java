@@ -5,6 +5,7 @@ import static org.junit.Assert.*;
 
 import model.BlockIndex;
 import model.Player;
+import model.RowGameModel;
 import model.RowBlockModel;
 import controller.RowGameController;
 
@@ -89,5 +90,56 @@ public class TestExample {
 
 	// Check the post-conditions (i.e. class invariants).
 	// See the @Test annotation.
+    }
+
+    @Test
+    public void testGameOverWin() {
+	// Perform setup and check the pre-conditions
+	game.move(new BlockIndex(0, 0));
+	game.move(new BlockIndex(2, 2));
+	game.move(new BlockIndex(0, 1));
+	game.move(new BlockIndex(2, 1));
+	for (int column = 0; column < 2; column++) {
+	    assertEquals("X", game.gameModel.blocksData[0][column].getContents());
+	} // end for column
+	assertEquals(null, game.gameModel.getFinalResult());
+	// Call the unit under test: Player 1 has 3 Xs in a row
+	BlockIndex player1WinsBlockIndex = new BlockIndex(0, 2);
+	game.move(player1WinsBlockIndex);
+	// Check the post-conditions
+	assertEquals("X", game.gameModel.blocksData[player1WinsBlockIndex.getRow()][player1WinsBlockIndex.getColumn()].getContents());
+	assertEquals("Player 1 wins!", game.gameModel.getFinalResult());
+    }
+
+    @Test
+    public void testGameOverTie() {
+	// Perform setup and check the pre-conditions
+	for (int column = 0; column < 3; column++) {
+	    game.move(new BlockIndex(0, column));
+	} // end for column
+	for (int column = 0; column < 3; column++) {
+	    game.move(new BlockIndex(2, column));
+	} // end for column	       
+	for (int column = 0; column < 2; column++) {
+	    game.move(new BlockIndex(1, column));
+	} // end for column
+	assertEquals(null, game.gameModel.getFinalResult());
+	// Call the unit under test: Neither player wins
+	game.move(new BlockIndex(1, 2));
+	// Check the post-conditions
+	assertEquals(RowGameModel.GAME_END_NOWINNER, game.gameModel.getFinalResult());
+    }
+
+    @Test
+    public void testReset() {
+	// Perform the setup and check the pre-conditions
+	BlockIndex blockIndex = new BlockIndex(0, 0);
+	testLegalMoveHelper(blockIndex);
+
+	// Call the unit under test: Execute reset
+	game.resetGame();
+
+	// Check the post-conditions
+	this.checkInitialConfiguration();
     }
 }
