@@ -9,6 +9,7 @@ import java.awt.event.*;
 import java.util.ArrayList;
 import java.util.List;
 
+import model.BlockIndex;
 import model.RowGameModel;
 import controller.RowGameController;
 

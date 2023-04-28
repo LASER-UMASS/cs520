@@ -7,9 +7,9 @@ import javax.swing.JPanel;
 import java.awt.*;
 import java.awt.event.*;
 
+import model.BlockIndex;
 import model.RowGameModel;
 import model.Player;
-import view.BlockIndex;
 import view.RowGameGUI;
 
 public class RowGameController {
@@ -34,15 +34,19 @@ public class RowGameController {
     }
 
     /**
-     * Moves the current player into the given block.
+     * Moves the current player into the block at the given block index.
      *
-     * @param block The block to be moved to by the current player
+     * @param blockIndex The index of the block to be moved to by the current player
      */
-    public void move(JButton block) {
+    public void move(BlockIndex blockIndex) {
+	// Perform input validation
+	if ((blockIndex != null) &&
+	    (gameModel.blocksData[blockIndex.getRow()][blockIndex.getColumn()].getIsLegalMove() == false)) {
+	    throw new UnsupportedOperationException("Moving to row " + blockIndex.getRow() + " and column " + blockIndex.getColumn() + " is an illegal move.");
+	}
+	
 	// The Controller first manipulates the Model.
 	gameModel.movesLeft--;
-
-	BlockIndex blockIndex = gameView.getBlockIndex(block);
 	if(gameModel.getPlayer().equals(Player.PLAYER_1)) {
 	    // Check whether player 1 won
 	    if(blockIndex.matches(0, 0)) {
