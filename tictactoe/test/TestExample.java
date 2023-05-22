@@ -7,6 +7,7 @@ import model.BlockIndex;
 import model.Player;
 import model.RowGameModel;
 import model.RowBlockModel;
+import controller.ComputerRowGameController;
 import controller.HumanRowGameController;
 import controller.RowGameController;
 
@@ -26,7 +27,7 @@ public class TestExample {
 	game = null;
     }
 
-    private void checkInitialConfiguration() {
+    private void checkInitialConfiguration(RowGameController game) {
 	// Check the post-conditions for the new RowGameModel
 	assertNotNull(game.gameModel);
 	// The first player has the initial move
@@ -49,7 +50,7 @@ public class TestExample {
 	// The @Before method performs the setup and calls the unit under test.
 	//
 	// Check the post-conditions (i.e. class invariants)
-	this.checkInitialConfiguration();
+	this.checkInitialConfiguration(this.game);
     }
 
     @Test(expected = IllegalArgumentException.class)
@@ -64,7 +65,7 @@ public class TestExample {
 	// created a new RowGameModel.
 	//
 	// Check the pre-conditions (i.e. class invariants)
-	this.checkInitialConfiguration();
+	this.checkInitialConfiguration(this.game);
 	// Call the unit under test: Execute a legal move
 	game.move(blockIndex);
 	// Check the post-conditions (i.e. class invariants)
@@ -91,6 +92,24 @@ public class TestExample {
 
 	// Check the post-conditions (i.e. class invariants).
 	// See the @Test annotation.
+    }
+
+    @Test
+    public void testLegalMoveByComputer() {
+	// Perform set up
+	ComputerRowGameController computerGame = new ComputerRowGameController();
+	// Check the pre-conditions (i.e. class invariants)
+	this.checkInitialConfiguration(computerGame);
+	// Perform the unit under test: Execute a legal move by the computer
+	BlockIndex humanBlockIndex = new BlockIndex(0, 0);
+	BlockIndex computerBlockIndex = computerGame.move(humanBlockIndex);
+	// Check the post-conditions (i.e. class invariants)
+	assertEquals(Player.PLAYER_1, computerGame.gameModel.getPlayer());
+	assertEquals(7, computerGame.gameModel.movesLeft);
+	assertEquals("X", computerGame.gameModel.blocksData[humanBlockIndex.getRow()][humanBlockIndex.getColumn()].getContents());
+	assertEquals(false, computerGame.gameModel.blocksData[humanBlockIndex.getRow()][humanBlockIndex.getColumn()].getIsLegalMove());
+	assertEquals("O", computerGame.gameModel.blocksData[computerBlockIndex.getRow()][computerBlockIndex.getColumn()].getContents());
+	assertEquals(false, computerGame.gameModel.blocksData[computerBlockIndex.getRow()][computerBlockIndex.getColumn()].getIsLegalMove());
     }
 
     @Test
@@ -141,13 +160,13 @@ public class TestExample {
 	game.resetGame();
 
 	// Check the post-conditions
-	this.checkInitialConfiguration();
+	this.checkInitialConfiguration(this.game);
     }
 
     @Test(expected=UnsupportedOperationException.class)
     public void testUndoDisallowed() {
 	// Perform the setup and check the pre-conditions
-	this.checkInitialConfiguration();
+	this.checkInitialConfiguration(this.game);
 
 	// Call the unit under test: Execute undo
 	game.undo();
@@ -165,6 +184,6 @@ public class TestExample {
 	game.undo();
 
 	// Check the post-conditions
-	this.checkInitialConfiguration();
+	this.checkInitialConfiguration(this.game);
     }
 }
