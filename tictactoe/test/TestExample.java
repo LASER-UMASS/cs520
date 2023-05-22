@@ -7,6 +7,7 @@ import model.BlockIndex;
 import model.Player;
 import model.RowGameModel;
 import model.RowBlockModel;
+import controller.HumanRowGameController;
 import controller.RowGameController;
 
 /**
@@ -17,7 +18,7 @@ public class TestExample {
 
     @Before
     public void setUp() {
-	game = new RowGameController();
+	game = new HumanRowGameController();
     }
 
     @After

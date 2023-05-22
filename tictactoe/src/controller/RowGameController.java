@@ -12,7 +12,13 @@ import model.RowGameModel;
 import model.Player;
 import view.RowGameGUI;
 
-public class RowGameController {
+/**
+ * The RowGameController class is responsible for following the game rules.
+ *
+ * NOTE) This class is applying the Template method design pattern for the 
+ *       following game rules: move, undo.
+ */
+public abstract class RowGameController {
     public RowGameModel gameModel;
     public RowGameGUI gameView;
 
@@ -38,7 +44,7 @@ public class RowGameController {
      *
      * @param blockIndex The index of the block to be moved to by the current player
      */
-    public void move(BlockIndex blockIndex) {
+    protected void basicMove(BlockIndex blockIndex) {
 	// Perform input validation
 	if ((blockIndex != null) &&
 	    (gameModel.blocksData[blockIndex.getRow()][blockIndex.getColumn()].getIsLegalMove() == false)) {
@@ -356,11 +362,13 @@ public class RowGameController {
 	gameView.update(gameModel);
     }
 
+    public abstract BlockIndex move(BlockIndex blockIndex);
+
     /**
      * Performs undo for the last move taken if the game is not
      * in its initial configuration or has been finished.
      */
-    public void undo() {
+    protected void basicUndo() {
 	// Check the pre-conditions: It cannot be either the start or end of the game.
 	if ((gameModel.movesLeft == 9) ||
 	    (gameModel.getFinalResult() != null)) {
@@ -372,7 +380,9 @@ public class RowGameController {
 
 	// Update the view
 	gameView.update(gameModel);
-    }    
+    }
+
+    public abstract void undo();
 
     /**
      * Ends the game disallowing further player turns.
