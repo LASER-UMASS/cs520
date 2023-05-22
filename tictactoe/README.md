@@ -12,13 +12,18 @@
 
 ### How to run (from Terminal):
 
-1. After building the project (i.e., running `ant`), run the following command in the tictactoe folder:
-   `java -cp bin RowGameApp`
+1. After building the project (i.e., running `ant`), run the following command in the tictactoe folder to play against a human player:
+   `java -cp bin RowGameApp HUMAN_VS_HUMAN`
+   
+   Run the following command in the tictactoe folder to play against a computer player:
+   `java -cp bin RowGameApp HUMAN_VS_COMPUTER`
 
 ### How to clean up (from Terminal):
 
 1. Run `ant clean` to clean the project (i.e., delete all generated files).
 
 Supported features:
+
+* Player 2 can now be either another human player or a computer player. See Step 4 above.
 
 * Undo functionality - If the game has not just started or finished, the users are allowed to undo their previous moves. The user should click on the Undo button to undo the immediately previous move.
