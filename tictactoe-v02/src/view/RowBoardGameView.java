@@ -7,6 +7,7 @@ import java.awt.event.*;
 
 import model.RowGameModel;
 import controller.RowGameController;
+import logger.Logger;
 
 public class RowBoardGameView implements RowGameView {
     public JButton[][] blocks = new JButton[3][3];
@@ -42,6 +43,7 @@ public class RowBoardGameView implements RowGameView {
     public void updateBlock(RowGameModel gameModel, int row, int column) {
 	blocks[row][column].setText(gameModel.blocksData[row][column].getContents());
 	blocks[row][column].setEnabled(gameModel.blocksData[row][column].getIsLegalMove());
+    Logger.log("updates");
     }
 
     public void update(RowGameModel gameModel) {

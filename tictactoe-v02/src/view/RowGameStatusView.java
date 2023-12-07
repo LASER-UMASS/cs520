@@ -1,6 +1,9 @@
 package view;
 
 import javax.swing.JTextArea;
+
+import logger.Logger;
+
 import javax.swing.JPanel;
 import java.awt.*;
 import java.awt.event.*;
@@ -27,9 +30,11 @@ public class RowGameStatusView implements RowGameView {
 	    } else{
 		playerturn.setText("'O': " + Player.PLAYER_2.getLabel());
 	    }
+        Logger.log("updates");
 	}
 	else {
 	    playerturn.setText(gameModel.getFinalResult());
+        Logger.log("updates");
 	}
     }
 }
