@@ -1,12 +1,14 @@
+package model;
+
 /**
  * The TicTacToeBlock class represents a given block in the game.
  */
-public class TicTacToeBlock
+public class RowBlockModel
 {
     /**
      * The game that contains this block
      */
-    private TicTacToeGame game;
+    private RowGameModel game;
 
     /**
      * The current value of the contents of this block
@@ -24,7 +26,7 @@ public class TicTacToeBlock
      * @param game The game that will contain the new block
      * @throws IllegalArgumentException When the given game is null
      */
-    public TicTacToeBlock(TicTacToeGame game) {
+    public RowBlockModel(RowGameModel game) {
 	super();
 
 	if (game == null) {
@@ -35,7 +37,7 @@ public class TicTacToeBlock
 	this.reset();
     }
 
-    public TicTacToeGame getGame() {
+    public RowGameModel getGame() {
 	return this.game;
     }
 

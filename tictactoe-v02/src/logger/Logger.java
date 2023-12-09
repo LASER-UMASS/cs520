@@ -1,3 +1,6 @@
+package logger;
+
+
 /**
  * The Logger class supports tracing events to STDOUT.
  *
@@ -7,7 +10,7 @@
  */
 public class Logger 
 {
-    public static final String LOGGER_PROPERTY_NAME = "Logger.tracing";
+    public static final String LOGGER_PROPERTY_NAME = "logger.Logger.tracing";
 
     /**
      * Whether tracing is ON (true) or OFF (false)
@@ -16,7 +19,8 @@ public class Logger
 
     static {
 	// Allows the user to turn ON and OFF tracing
-	tracing = new Boolean(System.getProperty(LOGGER_PROPERTY_NAME, "" + Boolean.FALSE));
+	tracing = 
+	    new Boolean(System.getProperty(LOGGER_PROPERTY_NAME, "" + Boolean.FALSE));
     }
 
     /**
