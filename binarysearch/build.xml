@@ -1,0 +1,55 @@
+<project name="BinarySearch" default="compile" basedir=".">
+
+    <property name="checkstyle.jar" value="lib/checkstyle-13.2.0-all.jar"/>
+
+<!-- Clean up -->
+    <target name="clean" description="Clean">
+        <delete dir="bin"/>
+        <delete dir="jdoc"/>
+    </target>
+
+<!-- Initialize build -->
+    <target name="init">
+        <mkdir dir="bin"/>
+        <mkdir dir="jdoc"/>
+    </target>
+
+<!-- Generate the documentation based on the javadoc comments -->
+    <target name="document" depends="init" description="Generate
+    documentation for all sources">
+        <javadoc defaultexcludes="yes"
+		  destdir="jdoc"
+		  author="true"
+		  version="true"
+		  access="private"
+		  use="true"
+		  windowtitle="BinarySearch API doc">
+	      <fileset dir="src"/>
+	      </javadoc>
+    </target>
+
+<!-- Compile the project -->
+    <target name="compile" depends="init" description="Compile all sources">
+        <javac includeantruntime="true" 
+               srcdir="src"
+               destdir="bin"
+               debug="yes">
+        </javac>
+    </target>
+
+    <!-- Perform linting on the project -->
+    <target name="init_lint">
+        <taskdef name="checkstyle"
+             classname="com.puppycrawl.tools.checkstyle.ant.CheckstyleAntTask"
+             classpath="${checkstyle.jar}"
+	/>
+    </target>
+    
+    <target name="lint" depends="init_lint" description="Lint all sources">
+      <checkstyle config="lib/sun_checks.xml">
+	<fileset dir="src" includes="**/*.java"/>
+	<formatter type="plain"/>
+      </checkstyle>
+    </target>
+   
+</project>
